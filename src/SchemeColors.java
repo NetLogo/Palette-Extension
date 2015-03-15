@@ -4,23 +4,22 @@ import org.nlogo.api.DefaultReporter;
 import org.nlogo.api.ExtensionException ;
 import org.nlogo.api.LogoException ;
 import org.nlogo.api.LogoList ;
+import org.nlogo.api.LogoListBuilder ;
 import org.nlogo.api.Syntax ;
 
 //TODO: Check cache handling
 
 public class SchemeColors extends DefaultReporter
 {
-
-	static LogoList list;
 	
 	public Syntax getSyntax()
 	{
 		int[] right = {
-				Syntax.TYPE_STRING ,
-				Syntax.TYPE_STRING ,
-				Syntax.TYPE_NUMBER ,
+				Syntax.StringType() ,
+				Syntax.StringType() ,
+				Syntax.NumberType() ,
 		} ;
-		int ret = Syntax.TYPE_LIST ;
+		int ret = Syntax.ListType() ;
 		return Syntax.reporterSyntax( right , ret ) ;
 	}
 	
@@ -45,16 +44,15 @@ public class SchemeColors extends DefaultReporter
 		
 		legend = ColorSchemes.getRGBArray(schemename, legendname, size);
 
-		list = new LogoList();
-		LogoList rgblist = null;
+		LogoListBuilder list = new LogoListBuilder();
 		for (int i = 0 ; i < legend.length; i++)
 		{
-			rgblist = new LogoList() ;
+		  LogoListBuilder rgblist = new LogoListBuilder() ;
 			rgblist.add(new Double (legend[i][0])) ;
 			rgblist.add(new Double (legend[i][1])) ;
 			rgblist.add(new Double (legend[i][2])) ;
-			list.add(rgblist);
+			list.add(rgblist.toLogoList());
 		}
-		return list ;
+		return list.toLogoList() ;
 	}
 }

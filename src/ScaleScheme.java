@@ -4,6 +4,7 @@ import org.nlogo.api.DefaultReporter;
 import org.nlogo.api.ExtensionException ;
 import org.nlogo.api.LogoException ;
 import org.nlogo.api.LogoList ;
+import org.nlogo.api.LogoListBuilder ;
 import org.nlogo.api.Syntax ;
 
 // TODO: Check cache handling
@@ -11,17 +12,15 @@ import org.nlogo.api.Syntax ;
 public class ScaleScheme extends DefaultReporter
 {
 
-	static LogoList list;
-	
 	public Syntax getSyntax()
 	{
-		int[] right = { Syntax.TYPE_STRING ,
-				Syntax.TYPE_STRING ,
-				Syntax.TYPE_NUMBER ,
-				Syntax.TYPE_NUMBER ,
-				Syntax.TYPE_NUMBER ,
-				Syntax.TYPE_NUMBER } ;
-		int ret = Syntax.TYPE_LIST ;
+		int[] right = { Syntax.StringType() ,
+				Syntax.StringType() ,
+				Syntax.NumberType() ,
+				Syntax.NumberType() ,
+				Syntax.NumberType() ,
+				Syntax.NumberType() } ;
+		int ret = Syntax.ListType() ;
 		return Syntax.reporterSyntax( right , ret ) ;
 	}
 
@@ -91,7 +90,7 @@ public class ScaleScheme extends DefaultReporter
 		
 		legend = ColorSchemes.getRGBArray(schemename, legendname, size);
 		
-		list = new LogoList() ;
+		LogoListBuilder list = new LogoListBuilder() ;
 		try 
 		{
 			list.add(new Double (legend[index][0])) ;
@@ -114,6 +113,6 @@ public class ScaleScheme extends DefaultReporter
 					" but your third argument is " + size) ;
 		}
 		
-		return list ;
+		return list.toLogoList() ;
 	}
 }

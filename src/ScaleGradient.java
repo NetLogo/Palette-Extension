@@ -6,6 +6,7 @@ import org.nlogo.api.DefaultReporter;
 import org.nlogo.api.ExtensionException ;
 import org.nlogo.api.LogoException ;
 import org.nlogo.api.LogoList ;
+import org.nlogo.api.LogoListBuilder ;
 import org.nlogo.api.Syntax ;
 
 
@@ -30,12 +31,12 @@ public class ScaleGradient extends DefaultReporter
 	{
 		int[] right = 
 		{ 
-			Syntax.TYPE_LIST ,   // n list with lists of 3 numbers [[r g b] [r g b] ...]
-			Syntax.TYPE_NUMBER , // number with the value to scale 
-			Syntax.TYPE_NUMBER , // number with range1
-			Syntax.TYPE_NUMBER   // number with range2
+			Syntax.ListType() ,   // n list with lists of 3 numbers [[r g b] [r g b] ...]
+			Syntax.NumberType() , // number with the value to scale 
+			Syntax.NumberType() , // number with range1
+			Syntax.NumberType()   // number with range2
 		};
-		int ret = Syntax.TYPE_LIST ; // list with 3 numbers [r g b]
+		int ret = Syntax.ListType() ; // list with 3 numbers [r g b]
 		return Syntax.reporterSyntax( right , ret ) ;
 	}	
 	
@@ -152,7 +153,7 @@ public class ScaleGradient extends DefaultReporter
 		}
 		
 		// Extract rgb values of resulting gradient color to a LogoList
-		LogoList gradientList = new LogoList() ;
+		LogoListBuilder gradientList = new LogoListBuilder() ;
 		try
 		{
 			gradientList.add( new Double( gradientArray[ index ][ 0 ] ) ) ;
@@ -166,7 +167,7 @@ public class ScaleGradient extends DefaultReporter
 					e.getMessage() ) ;
 		}
 
-		return gradientList ;
+		return gradientList.toLogoList() ;
 	}
 	
 	private void validRGB( int c )
