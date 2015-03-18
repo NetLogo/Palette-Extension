@@ -155,7 +155,7 @@ Feedback
 
 ## Terms of Use
 
-Copyright 1999-2015 by Uri Wilensky.
+Copyright 1999-2015 by Uri Wilensky, Daniel Kornhauser.
 
 The MIT License
 
