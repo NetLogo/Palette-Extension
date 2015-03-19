@@ -43,11 +43,10 @@ In order to see the difference you can turn on and off the gradient in the Heat 
 
 ## Examples
 
-### There are several examples of using the pallete primitive:
+### There are several examples of using the pallete primitive in the models library:
 
-* Scale-Gradient Applet - Scale-Scheme Example.nlogo
-* Scale-Gradient Applet - Scale-Gradient Example.nlogo
-* Color Gradient Applet - Color Gradient Example.nlogo
+* Scale-Gradient Example.nlogo
+* Color Gradient Example.nlogo
 
 ### Demo Models from the NetLogo Library with scheme colors
 
@@ -57,7 +56,7 @@ In order to see the difference you can turn on and off the gradient in the Heat 
 Color mapping using NetLogo Built-in Primitives
 Colors mapping using NetLogo Palette Extension
 
-Be sure to check to ColorBrewer webpage. To get a deeper understanding of how to use the color schemes read the Colorbrewer paper (Harrower, Brewer 2003
+Be sure to check to ColorBrewer webpage. To get a deeper understanding of how to use the color schemes read the Colorbrewer paper (Harrower, Brewer 2003)
 
 ## Palette Extension Dictionary
 ### palette:scale-gradient
