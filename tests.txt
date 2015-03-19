@@ -1,0 +1,31 @@
+Gradient-Scale1
+  extensions [palette]
+  palette:scale-gradient [[0 0 0] [0 0 0] [0 0 0]] 255 255 255 => [0 0 0]
+
+Gradient-Scale2
+  extensions [palette]
+  palette:scale-gradient [[255 255 255] [255 255 255] [255 255 255]] 0 0 0 => [255 255 255]
+
+Gradient-Scale3
+  extensions [palette]
+  palette:scale-gradient [[255 255 0] [0 255 255] [255 0 255]] 0 0 0 => [255 255 0]
+
+Gradient-Scale4
+  extensions [palette]
+  palette:scale-gradient [[255 44 0] [0 255 100] [10 0 150]] 0 255 0 => [9 0 149]
+
+Scale-Scheme1
+  extensions [palette]
+  palette:scale-scheme "Sequential" "Reds" 9 255 255 255 => [255 245 240]
+
+Scale-Scheme2
+  extensions [palette]
+  palette:scale-scheme "Sequential" "Oranges" 7 255 0 255 => [140 45 4]
+
+Scale-Scheme3
+  extensions [palette]
+  palette:scale-scheme "Divergent" "BrBG" 4 0 0 0 => [166 97 26]
+
+Scale-Scheme4
+  extensions [palette]
+  palette:scale-scheme "Qualitative" "Dark2" 5 0 255 0 => [102 166 30]
