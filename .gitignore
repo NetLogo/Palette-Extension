@@ -1,4 +1,4 @@
-target
-palette.jar
-palette.zip
-palette.jar.pack.gz
+target/
+/palette.jar
+/palette.zip
+/palette.jar.pack.gz
