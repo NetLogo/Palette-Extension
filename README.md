@@ -41,16 +41,15 @@ For example, gradients are more aesthetic thus are more memorable than discrete 
 
 In order to see the difference you can turn on and off the gradient in the Heat Diffusion model. You can observe that turning gradient on makes the model more aesthetic, but it becomes harder to estimate the value of a patch at a given position.
 
-## Examples
+## Example Models
 
-### There are several examples of using the palette primitive in the models library:
+There is an example of using the palette primitives in the Code Examples section of the models library:
 
-* Scale-Gradient Example.nlogo
-* Color Gradient Example.nlogo
+* Palette Example
 
-### Demo Models from the NetLogo Library with scheme colors
+And one Sample Model that uses the extension:
 
-* Heat Diffusion Applet - Heat Diffusion.nlogo
+* Heat Diffusion - Alternative Gradient
 
 ## Documentation
 
