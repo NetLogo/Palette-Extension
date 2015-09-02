@@ -19,6 +19,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.AWTPermission;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
@@ -111,16 +112,18 @@ ClipboardOwner
 	{
 		setVisible(true);
 	}
-	
+
     /** This method handles events for the text field. */
     public void actionPerformed(ActionEvent e) {
-    	if (e.getSource() == copyButton ) 
+    	if (e.getSource() == copyButton )
     	{
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
-			try 
-			{sm.checkSystemClipboardAccess();}
-			catch (Exception ex) {ex.printStackTrace();}
+			try {
+        sm.checkPermission(new AWTPermission("accessClipboard"));
+      } catch (Exception ex) {
+        ex.printStackTrace();
+      }
 		}
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		StringSelection st = new StringSelection(statusLabel.getText());
