@@ -21,28 +21,28 @@ public class ScaleGradient extends DefaultReporter
 
     // Preceptually reasonable gradation resolution of 256 different colors
 	// for each pair of colors
-	final static int SIZE = 256 ; 
-	
-	// Static variables for cache handling 
-	private static LogoList colorLogoListCache = null ;	
+	final static int SIZE = 256 ;
+
+	// Static variables for cache handling
+	private static LogoList colorLogoListCache = null ;
 	private static int[][] gradientArray =  null;
-	
+
 	public Syntax getSyntax()
 	{
-		int[] right = 
-		{ 
+		int[] right =
+		{
 			Syntax.ListType() ,   // n list with lists of 3 numbers [[r g b] [r g b] ...]
-			Syntax.NumberType() , // number with the value to scale 
+			Syntax.NumberType() , // number with the value to scale
 			Syntax.NumberType() , // number with range1
 			Syntax.NumberType()   // number with range2
 		};
 		int ret = Syntax.ListType() ; // list with 3 numbers [r g b]
 		return Syntax.reporterSyntax( right , ret ) ;
-	}	
-	
+	}
+
 	public Object report( Argument args[] , Context context )
 			throws ExtensionException
-	{	
+	{
 		// Extract arguments
 		try
 		{
@@ -58,13 +58,13 @@ public class ScaleGradient extends DefaultReporter
 		}
 
 		// Validate colorList rgb arguments
-		Iterator it = colorLogoList.iterator ();
-		while (it.hasNext ())
+		Iterator<Object> it = colorLogoList.iterator();
+		while (it.hasNext())
 		{
 			LogoList RGBList = (LogoList) it.next();
 			validRGBList(RGBList);
 		}
-		
+
 		// Normalize var, min, max
 		double perc = 0.0 ;
 		if( min > max ) // min and max are really reversed
@@ -111,47 +111,47 @@ public class ScaleGradient extends DefaultReporter
 		{
 			index = (int) Math.round(perc * ( (SIZE - 1) + (SIZE)*(colorLogoList.size() - 2) )) ; // 255 + n * 256
 		}
-		
+
 		// The order of the evaluation matters in statement below !
-		if (colorLogoListCache == null || 
+		if (colorLogoListCache == null ||
 				!colorLogoListCache.equals( colorLogoList))
 		{
 
 			// Store current list as cache
 			colorLogoListCache = colorLogoList;
 
-			// Create an array containing color instances of the arguments 
-			ArrayList colorList = new ArrayList();
+			// Create an array containing color instances of the arguments
+			ArrayList<Object> colorList = new ArrayList<Object>();
 			it = colorLogoList.iterator ();
 			while (it.hasNext ())
 			{
 				LogoList RGBList = (LogoList) it.next();
 				java.awt.Color color = new java.awt.Color
-				( 
-						( (Double) RGBList.get(0) ).intValue() , 
+				(
+						( (Double) RGBList.get(0) ).intValue() ,
 						( (Double) RGBList.get(1) ).intValue() ,
-						( (Double) RGBList.get(2) ).intValue() 
+						( (Double) RGBList.get(2) ).intValue()
 				);
 				colorList.add( color );
 			}
 
-			// Create array with resulting gradient color instances		
+			// Create array with resulting gradient color instances
 
 
 			gradientArray = new int [SIZE * (colorList.size() - 1) ] [3];
 			for (int i = 0; i < (colorList.size() - 1) ; i++)
 			{
-				ColorGradient colorGradient = new ColorGradient( 
-						(java.awt.Color) colorList.get(i), 
-						(java.awt.Color) colorList.get(i + 1) , 
+				ColorGradient colorGradient = new ColorGradient(
+						(java.awt.Color) colorList.get(i),
+						(java.awt.Color) colorList.get(i + 1) ,
 						SIZE) ;
 				for (int j = 0; j < SIZE ; j++)
 				{
 					gradientArray[j+ (SIZE * i)] = colorGradient.getGradientRGBArray()[j];
-				}			
+				}
 			}
 		}
-		
+
 		// Extract rgb values of resulting gradient color to a LogoList
 		LogoListBuilder gradientList = new LogoListBuilder() ;
 		try
@@ -162,14 +162,14 @@ public class ScaleGradient extends DefaultReporter
 		}
 		catch( ArrayIndexOutOfBoundsException e )
 		{
-			throw new ExtensionException( 
+			throw new ExtensionException(
 					"Please e-mail send this erro to bugs@ccl.northwestern.edu" +
 					e.getMessage() ) ;
 		}
 
 		return gradientList.toLogoList() ;
 	}
-	
+
 	private void validRGB( int c )
 	throws ExtensionException
 	{
@@ -189,7 +189,7 @@ public class ScaleGradient extends DefaultReporter
 				validRGB( ((Double)rgb.get( 0 )).intValue() ) ;
 				validRGB( ((Double)rgb.get( 1 )).intValue() ) ;
 				validRGB( ((Double)rgb.get( 2 )).intValue() ) ;
-				return ; 
+				return ;
 			}
 			catch( ClassCastException e )
 			{
@@ -204,5 +204,5 @@ public class ScaleGradient extends DefaultReporter
 										  rgb.size() + "numbers") ;
 		}
 		}
-	
+
 }
