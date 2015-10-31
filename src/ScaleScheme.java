@@ -1,11 +1,12 @@
-import org.nlogo.api.Argument ;
-import org.nlogo.api.Context ;
+import org.nlogo.api.Argument;
+import org.nlogo.api.Context;
 import org.nlogo.api.DefaultReporter;
-import org.nlogo.api.ExtensionException ;
-import org.nlogo.api.LogoException ;
-import org.nlogo.api.LogoList ;
-import org.nlogo.api.LogoListBuilder ;
-import org.nlogo.api.Syntax ;
+import org.nlogo.api.ExtensionException;
+import org.nlogo.api.LogoException;
+import org.nlogo.core.LogoList;
+import org.nlogo.api.LogoListBuilder;
+import org.nlogo.core.Syntax;
+import org.nlogo.core.SyntaxJ;
 
 // TODO: Check cache handling
 
@@ -21,7 +22,7 @@ public class ScaleScheme extends DefaultReporter
 				Syntax.NumberType() ,
 				Syntax.NumberType() } ;
 		int ret = Syntax.ListType() ;
-		return Syntax.reporterSyntax( right , ret ) ;
+		return SyntaxJ.reporterSyntax( right , ret ) ;
 	}
 
 	
