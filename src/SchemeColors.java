@@ -1,6 +1,6 @@
 import org.nlogo.api.Argument;
 import org.nlogo.api.Context;
-import org.nlogo.api.DefaultReporter;
+import org.nlogo.api.Reporter;
 import org.nlogo.api.ExtensionException;
 import org.nlogo.api.LogoException;
 import org.nlogo.core.LogoList;
@@ -10,7 +10,7 @@ import org.nlogo.core.SyntaxJ;
 
 //TODO: Check cache handling
 
-public class SchemeColors extends DefaultReporter
+public class SchemeColors implements Reporter
 {
 	
 	public Syntax getSyntax()

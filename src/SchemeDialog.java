@@ -4,10 +4,10 @@ import org.nlogo.api.ExtensionException;
 import org.nlogo.api.LogoException;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
-import org.nlogo.api.DefaultCommand;
+import org.nlogo.api.Command;
 
 
-public class SchemeDialog extends DefaultCommand
+public class SchemeDialog implements Command
 {
 	public Syntax getSyntax()
 	{
