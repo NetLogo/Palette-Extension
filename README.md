@@ -1,4 +1,15 @@
+
 # NetLogo Palette Extension
+
+## Building
+
+Use the netlogo.jar.url environment variable to tell sbt which NetLogo.jar to compile against (defaults to NetLogo 5.3). For example:
+
+    sbt -Dnetlogo.jar.url=file:///path/to/NetLogo/target/NetLogo.jar package
+
+If compilation succeeds, `palette.jar` will be created.
+
+## Using the Palette Extension
 
 The NetLogo palette extension allows to map values to colors. The colors go beyond NetLogo colors, including ColorBrewer color schemes or arbitrary RGB colors. Additionally, it provides a primitive to map to color gradients and a primitive to launch a ColorBrewer dialog for easy scheme selection.
 
@@ -41,7 +52,7 @@ For example, gradients are more aesthetic thus are more memorable than discrete 
 
 In order to see the difference you can turn on and off the gradient in the Heat Diffusion model. You can observe that turning gradient on makes the model more aesthetic, but it becomes harder to estimate the value of a patch at a given position.
 
-## Example Models
+### Example Models
 
 There is an example of using the palette primitives in the Code Examples section of the models library:
 
@@ -51,26 +62,31 @@ And one Sample Model that uses the extension:
 
 * Heat Diffusion - Alternative Gradient
 
-## Documentation
+### Further Reading
 
-Color mapping using NetLogo Built-in Primitives
-Colors mapping using NetLogo Palette Extension
+* Be sure to check the [ColorBrewer web page](http://colorbrewer2.org/)
+* To get a deeper understanding of how to use the color schemes read the ColorBrewer paper (Harrower, Brewer 2003)
 
-Be sure to check to ColorBrewer web page. To get a deeper understanding of how to use the color schemes read the ColorBrewer paper (Harrower, Brewer 2003)
 
-## Palette Extension Dictionary
+## Primitives
 
-### palette:scale-gradient
 
-`scale-gradient` _rgb-color-list_ _number_ _range1_ _range2_
+### `palette:scale-gradient`
 
-Reports an RGB color proportional to _number_ using a gradient generated with _rgb-color-list_. An _rgb-color-list_ consist of a list containing RGB list with three values between 0 and 255: [[r1 g1 b1] [r2 g2 b2] [r3 g3 b3] ...]
+```NetLogo
+palette:scale-gradient rgb-color-list number range1 range2
+```
 
-If _range1_ is less than _range2_, the color will be directly mapped to gradient colors. While, if _range2_ is less than _range1_, the color gradient is inverted.
 
-If _number_ is less than _range1_, then the first color of is _RGB-color-list_ is chosen.
+Reports an RGB color proportional to *number* using a gradient generated with *rgb-color-list*. An *rgb-color-list* consist of a list containing RGB list with three values between 0 and 255: [[r1 g1 b1] [r2 g2 b2] [r3 g3 b3] ...]
 
-If _number_ is grater than _range2_, then the last color of is _RGB-color-list_ is chosen.
+If *range1* is less than *range2*, the color will be directly mapped to gradient colors. While, if *range2* is less than *range1*, the color gradient is inverted.
+
+If *number* is less than *range1*, then the first color of is *RGB-color-list* is chosen.
+
+If *number* is grater than *range2*, then the last color of is *RGB-color-list* is chosen.
+
+Example:
 
 ```
 ask patches
@@ -81,17 +97,24 @@ ask patches
 ;; colors each patch with a color proportional to the gradient
 ```
 
-### palette:scale-scheme
 
-`scale-scheme` _scheme-type_ _scheme-color_ _number-of-classes_ _number_ _range1_ _range2_
 
-Reports an RGB color proportional to _number_ using the color brewer schemes. It takes six arguments the first three arguments define the ColorBrewer legend. Fir the user should select a scheme-type which can be "Sequential", "Divergent, Qualitative". Then it should select a variety of scheme-colors which depending on the scheme-color can have names such as "Reds", "Divergent", "Set1". Finally the user should select the number of classes with a minimum of 3 and a maximum between 9 and 11. For more information go to http://www.colorbrewer.org or consult the scheme-dialog primitive.
+### `palette:scale-scheme`
 
-If _range1_ is less than _range2_, the color will be directly mapped to scheme colors. While, if _range2_ is less than _range1_, the color scheme selection is inverted.
+```NetLogo
+palette:scale-scheme scheme-type scheme-color number-of-classes range1 range2
+```
 
-If _number_ is less than _range1_, then the first color of the resulting ColorBrewer legend is chosen.
 
-If _number_ is grater than _range2_, then the last color of the resulting ColorBrewer legend is chosen.
+Reports an RGB color proportional to *number* using the color brewer schemes. It takes six arguments the first three arguments define the ColorBrewer legend. Fir the user should select a scheme-type which can be "Sequential", "Divergent, Qualitative". Then it should select a variety of scheme-colors which depending on the scheme-color can have names such as "Reds", "Divergent", "Set1". Finally the user should select the number of classes with a minimum of 3 and a maximum between 9 and 11. For more information go to http://www.colorbrewer.org or consult the scheme-dialog primitive.
+
+If *range1* is less than *range2*, the color will be directly mapped to scheme colors. While, if *range2* is less than *range1*, the color scheme selection is inverted.
+
+If *number* is less than *range1*, then the first color of the resulting ColorBrewer legend is chosen.
+
+If *number* is grater than *range2*, then the last color of the resulting ColorBrewer legend is chosen.
+
+Example:
 
 ```
 ask patches
@@ -102,11 +125,18 @@ ask patches
 ;; colors each patch with a color from the Color Brewer Schemes
 ```
 
-### palette:scheme-colors
 
-`scheme-colors` _scheme-type_ _scheme-color_ _number-of-classes_
+
+### `palette:scheme-colors`
+
+```NetLogo
+palette:scheme-colors scheme-type scheme-color number-of-classes
+```
+
 
 report a list of RGB colors with the size specified in the a number of classes
+
+Example:
 
 ```
 show palette:scheme-colors "Divergent" "Spectral" 3
@@ -118,17 +148,24 @@ ask patches
   [set pcolor palette:scale-gradient palette:scheme-colors "Divergent" "Spectral" 9 pxcor min-pxcor max-pxcor]
 ```
 
-### palette:scale-gradient
 
-`scale-gradient` _rgb-color-list_ _number_ _range1_ _range2_
+
+### `palette:scale-gradient`
+
+```NetLogo
+palette:scale-gradient rgb-color-list number range1 range2
+```
+
 
 Reports an RGB color proportional to number using a gradient generated with _rgb-color-list_. An _rgb-color-list_ consist of a list containing RGB list with three values between 0 and 255: [[r1 g1 b1] [r2 g2 b2] [r3 g3 b3] ...]
 
-If _range1_ is less than _range2_, the color will be directly mapped to gradient colors. While, if _range2_ is less than _range1_, the color gradient is inverted.
+If *range1* is less than *range2*, the color will be directly mapped to gradient colors. While, if *range2* is less than *range1*, the color gradient is inverted.
 
-If _number_ is less than _range1_, then the first color of is _RGB-color-list_ is chosen.
+If *number* is less than *range1*, then the first color of is *RGB-color-list* is chosen.
 
-If _number_ is grater than _range2_, then the last color of is _RGB-color-list_ is chosen.
+If *number* is grater than *range2*, then the last color of is *RGB-color-list* is chosen.
+
+Example:
 
 ```
 ask patches
@@ -138,6 +175,8 @@ ask patches
 
 ;; colors each patch with a color proportional to the gradient
 ```
+
+
 
 ## References
 
