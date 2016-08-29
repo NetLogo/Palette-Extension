@@ -70,6 +70,11 @@ And one Sample Model that uses the extension:
 
 ## Primitives
 
+[`palette:scale-gradient`](#palettescale-gradient)
+[`palette:scale-scheme`](#palettescale-scheme)
+[`palette:scheme-colors`](#palettescheme-colors)
+[`palette:scale-gradient`](#palettescale-gradient)
+
 
 ### `palette:scale-gradient`
 
