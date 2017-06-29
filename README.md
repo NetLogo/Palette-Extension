@@ -185,7 +185,7 @@ ask patches
 
 ## References
 
-ColorBrewer http://www.colorbrewer.org
+ColorBrewer [www.colorbrewer.org](http://www.colorbrewer.org)
 
 HARROWER, M. and C. BREWER (2003). ColorBrewer: An online tool for selecting color schemes for maps. The Cartographic Journal 40(1): 27-37. )
 
