@@ -2,3 +2,4 @@ target/
 /palette.jar
 /palette.zip
 /palette.jar.pack.gz
+.bundledFiles
