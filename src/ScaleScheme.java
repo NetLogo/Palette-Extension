@@ -25,7 +25,7 @@ public class ScaleScheme implements Reporter
 		return SyntaxJ.reporterSyntax( right , ret ) ;
 	}
 
-	
+
 	public Object report( Argument args[] , Context context )
 			throws ExtensionException
 	{
@@ -48,7 +48,7 @@ public class ScaleScheme implements Reporter
 		{
 			throw new ExtensionException( e.getMessage() ) ;
 		}
-		
+
 		int index = 0;
 		int [][] legend;
 
@@ -76,7 +76,7 @@ public class ScaleScheme implements Reporter
 			{
 				perc = 1.0 ;
 			}
-			else if ( var < min ) 
+			else if ( var < min )
 			{
 				perc = 0.0 ;
 			}
@@ -87,33 +87,33 @@ public class ScaleScheme implements Reporter
 				perc = tempval / tempmax ;
 			}
 		}
-		index = (int) Math.ceil((perc * (size - 1))) ;		
-		
+		index = (int) Math.ceil((perc * (size - 1))) ;
+
 		legend = ColorSchemes.getRGBArray(schemename, legendname, size);
-		
+
 		LogoListBuilder list = new LogoListBuilder() ;
-		try 
+		try
 		{
-			list.add(new Double (legend[index][0])) ;
-			list.add(new Double (legend[index][1])) ;
-			list.add(new Double (legend[index][2])) ;
+			list.add(Double.valueOf(legend[index][0])) ;
+			list.add(Double.valueOf(legend[index][1])) ;
+			list.add(Double.valueOf(legend[index][2])) ;
 		}
-		catch (ArrayIndexOutOfBoundsException e) 
+		catch (ArrayIndexOutOfBoundsException e)
 		{
-			throw new ExtensionException( 
+			throw new ExtensionException(
 					"The number of colors in a scheme is limited to " +
 					String.valueOf(ColorSchemes.getRGBArray( schemename , legendname ).length) +
 					" but your third argument is " + size) ;
 		}
-		catch (NullPointerException e) 
+		catch (NullPointerException e)
 		{
-			throw new ExtensionException( 
-					
+			throw new ExtensionException(
+
 					"The number of colors in a scheme is limited to " +
 					String.valueOf(ColorSchemes.getRGBArray( schemename , legendname ).length) +
 					" but your third argument is " + size) ;
 		}
-		
+
 		return list.toLogoList() ;
 	}
 }
