@@ -157,14 +157,14 @@ public class ScaleGradient implements Reporter
 		LogoListBuilder gradientList = new LogoListBuilder() ;
 		try
 		{
-			gradientList.add( new Double( gradientArray[ index ][ 0 ] ) ) ;
-			gradientList.add( new Double( gradientArray[ index ][ 1 ] ) ) ;
-			gradientList.add( new Double( gradientArray[ index ][ 2 ] ) ) ;
+			gradientList.add( Double.valueOf( gradientArray[ index ][ 0 ] ) ) ;
+			gradientList.add( Double.valueOf( gradientArray[ index ][ 1 ] ) ) ;
+			gradientList.add( Double.valueOf( gradientArray[ index ][ 2 ] ) ) ;
 		}
 		catch( ArrayIndexOutOfBoundsException e )
 		{
 			throw new ExtensionException(
-					"Please e-mail send this erro to bugs@ccl.northwestern.edu" +
+					"Please e-mail send this error to bugs@ccl.northwestern.edu" +
 					e.getMessage() ) ;
 		}
 

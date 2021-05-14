@@ -152,7 +152,7 @@ public class ColorSchemesPanel
 
 		legendJComboBox.setModelFromString(colorSchemeType);
 
-		colorSizeJSpinner.setValue( new Integer(colorSchemeSize));
+		colorSizeJSpinner.setValue( Integer.valueOf(colorSchemeSize));
 
 		ImageIcon initialIcon =
 			new ColorSchemesIconImage(
