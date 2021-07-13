@@ -9,7 +9,7 @@ import org.nlogo.core.SyntaxJ;
 public class AdjustColorSaturation implements Command{
   public Syntax getSyntax(){
     int values[] = { Syntax.NumberType() };
-    return SyntaxJ.commandSyntax(values);
+    return SyntaxJ.commandSyntax(values, "-TPL");
   }
 
   public void perform(Argument args[], Context context) throws ExtensionException {

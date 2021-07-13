@@ -9,11 +9,13 @@ import org.nlogo.core.LogoList;
 import org.nlogo.api.LogoListBuilder;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
+import org.nlogo.core.AgentKindJ;
+import org.nlogo.api.Version;
 
 public class AdjustColorAlpha implements Command {
   public Syntax getSyntax() {
     int values[] = {Syntax.NumberType()};
-    return SyntaxJ.commandSyntax(values);
+    return SyntaxJ.commandSyntax(values, "-TPL");
   }
 
   public void perform(Argument args[], Context context) throws ExtensionException {
@@ -29,11 +31,10 @@ public class AdjustColorAlpha implements Command {
     SetColorAlpha sca = new SetColorAlpha();
     newAlpha = alpha + d_alpha;
     newAlpha = Math.min(Math.max((double) 0, newAlpha), (double) 255);
-    try{
-      sca.sca(newAlpha, context.getAgent());
+    if(context.getAgent().kind() == AgentKindJ.Patch() && !org.nlogo.api.Version$.MODULE$.is3D()){
+      throw new ExtensionException("Patches cannot have an alpha");
     }
-    catch(ExtensionException e){
-      throw new ExtensionException(e.getMessage());
-    }
+    sca.sca(context, newAlpha);
+
   }
 }

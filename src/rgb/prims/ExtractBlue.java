@@ -9,7 +9,7 @@ import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
 
 
-public class ExtractBrightness implements Reporter {
+public class ExtractBlue implements Reporter {
   public Syntax getSyntax() {
     int[] values = {
       Syntax.NumberType() | Syntax.ListType()
@@ -27,7 +27,6 @@ public class ExtractBrightness implements Reporter {
     catch(ExtensionException e){
       throw new ExtensionException(e.getMessage());
     }
-    ExtractHSB extractor = new ExtractHSB();
-    return extractor.extract(rgb, 2);
+    return rgb.get(2);
   }
 }

@@ -24,26 +24,9 @@ public class AlphaUpdated implements Reporter{
   public Object report(Argument args[] , Context context)
     throws ExtensionException{
 
-    LogoList the_rgbcolor = null;
-    double the_nlcolor = 0;
+    ColorManager cm = new ColorManager();
+    LogoList the_rgbcolor = cm.extractColorFromArg(args[0]);
     double alpha = 255;
-  //  _extractrgb ergb = new _extractrgb();
-
-    try{
-      the_rgbcolor = args[0].getList();
-    }
-    catch(ExtensionException e){
-      org.nlogo.api.Exceptions.ignore( e ) ;
-      try{
-        the_nlcolor = args[0].getDoubleValue();
-        the_nlcolor = org.nlogo.api.Color.modulateDouble(the_nlcolor);
-        the_rgbcolor = org.nlogo.api.Color.getRGBListByARGB(org.nlogo.api.Color.getARGBbyPremodulatedColorNumber(the_nlcolor));
-
-      }
-      catch(ExtensionException e2){
-        throw new ExtensionException("Input must be a list or a number");
-      }
-    }
     try{
       alpha = args[1].getDoubleValue();
     }

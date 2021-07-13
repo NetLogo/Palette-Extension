@@ -14,6 +14,10 @@ Gradient-Scale4
   extensions [palette]
   palette:scale-gradient [[255 44 0] [0 255 100] [10 0 150]] 0 255 0 => [9 0 149]
 
+Scale-Gradient-HSB
+  extensions [palette]
+  palette:scale-gradient-hsb [ [3.103 80.94 84.314] [3.103 80.94 84.314] ] 0 0 0 => [215 50 41]
+
 Scale-Scheme1
   extensions [palette]
   palette:scale-scheme "Sequential" "Reds" 9 255 255 255 => [255 245 240]
@@ -29,3 +33,663 @@ Scale-Scheme3
 Scale-Scheme4
   extensions [palette]
   palette:scale-scheme "Qualitative" "Dark2" 5 0 255 0 => [102 166 30]
+
+Extract-Alpha
+  extensions [palette]
+  palette:extract-alpha red => 255
+  palette:extract-alpha [0 5 5 19] => 19
+  palette:extract-alpha [14 14 14 14.9] => 14.9
+  palette:extract-alpha [255 255 100] => 255
+
+Extract-Alpha-Errors
+  extensions [palette]
+  palette:extract-alpha [100 100 100 -1] => ERROR Extension exception: Color must have valid RGB List
+  palette:extract-alpha [100 100] => ERROR Extension exception: Color must have valid RGB List
+  palette:extract-alpha [100 100 100 100 100] => ERROR Extension exception: Color must have valid RGB List
+  palette:extract-alpha ["a" "b" 100 100] => ERROR Extension exception: Color must have valid RGB List
+
+Alpha-Updated
+  extensions [palette]
+  palette:alpha-updated red 100 => [215 50 41 100]
+  palette:alpha-updated [100 100 100] 100 => [100 100 100 100]
+  palette:alpha-updated [100 50 50 50] 100 => [100 50 50 100]
+
+Alpha-Updated-Errors
+  extensions [palette]
+  palette:alpha-updated red -100 => ERROR Extension exception: alpha must be in the range from 0 to 255
+  palette:alpha-updated [100 100] 100 => ERROR Extension exception: Color must have valid RGB List
+  palette:alpha-updated [100 100 100 100] 350 => ERROR Extension exception: alpha must be in the range from 0 to 255
+
+Get-Color-Alpha
+  extensions [palette]
+  globals [c]
+  O> crt 2 [set color red]
+  [palette:get-color-alpha] of turtle 0 = 255 => true
+  T> set color [31 41 59]
+  [palette:get-color-alpha] of turtle 0 = 255 => true
+  T> set color [31 41 59 26]
+  [palette:get-color-alpha] of turtle 0 = 26 => true
+
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  [palette:get-color-alpha] of link 0 1 = 255 => true
+  L> set color [31 41 59 26]
+  [palette:get-color-alpha] of link 0 1 = 26 => true
+  L> set color [123 34 56]
+  [palette:get-color-alpha] of link 0 1 = 255 => true
+
+Get-Color-Alpha_2D
+  extensions [palette]
+  [palette:get-color-alpha] of patch 0 0 = 255 => true
+
+Get-Color-Alpha_3D
+  extensions [palette]
+  [palette:get-color-alpha] of patch 0 0 0 = 255 => true
+
+Set-Color-Alpha
+  extensions [palette]
+  O> crt 2 [set color red]
+  T> palette:set-color-alpha 27
+  [color] of turtle 0 => [215 50 41 27]
+  T> set color [31 41 59 26]
+  T> palette:set-color-alpha 255
+  [color] of turtle 0 => [31 41 59 255]
+
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  L> palette:set-color-alpha 182
+  [color] of link 0 1 => [215 50 41 182]
+
+Set-Color-Alpha-Errors
+  extensions [palette]
+  O> crt 1 [set color red]
+  T> palette:set-color-alpha 400 => ERROR Extension exception: Alpha must be in the range from 0 to 255
+  T> palette:set-color-alpha -100 => ERROR Extension exception: Alpha must be in the range from 0 to 255
+
+
+Set-Color-Alpha-Errors_2D
+  extensions [palette]
+  P> palette:set-color-alpha 100 => ERROR Extension exception: Patches do not have an alpha
+
+Set-Color-Alpha_3D
+  extensions [palette]
+  P> set pcolor red
+  P> palette:set-color-alpha 27
+  [pcolor] of patch 0 0 0 => [215 50 41 27]
+
+With-Alpha
+  extensions [palette]
+  red palette:with-alpha 100 => [215 50 41 100]
+  [30 30 30] palette:with-alpha 100 => [30 30 30 100]
+  [30 30 30 30] palette:with-alpha 31 => [30 30 30 31]
+  red palette:with-alpha -1 => ERROR Extension exception: alpha must be in the range from 0 to 255
+  red palette:with-alpha 256 => ERROR Extension exception: alpha must be in the range from 0 to 255
+
+Adjust-Color-Alpha
+  extensions [palette]
+  globals [c]
+  O> crt 2 [set color red]
+  T> palette:adjust-color-alpha 10
+  [color] of turtle 0 => [215 50 41 255]
+  T> palette:adjust-color-alpha -100
+  [color] of turtle 0 => [215 50 41 155]
+  T> palette:adjust-color-alpha -200
+  [color] of turtle 0 => [215 50 41 0]
+  T> palette:adjust-color-alpha 200
+  [color] of turtle 0 => [215 50 41 200]
+
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  L> palette:adjust-color-alpha -10
+  [color] of link 0 1 => [215 50 41 245]
+
+Adjust-Color-Alpha-Error_2D
+  extensions [palette]
+  P> palette:adjust-color-alpha 245 => ERROR Extension exception: Patches cannot have an alpha
+
+Extract-Transparency
+  extensions [palette]
+  palette:extract-transparency [100 100 100] => 0
+  palette:extract-transparency [100 100 100 100] => 60.7843137254902
+  palette:extract-transparency [100 100 100 100 100] => ERROR Extension exception: Color must have valid RGB List
+
+Set-Color-Transparency
+  extensions [palette]
+  O> crt 2 [set color red]
+  T> palette:set-color-transparency 27
+  [color] of turtle 0 => [215 50 41 186.15]
+
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  L> palette:set-color-transparency 27
+  [color] of link 0 1 => [215 50 41 186.15]
+
+Set-Color-Transparency-Errors
+  extensions [palette]
+  P> palette:set-color-transparency 100 => ERROR Extension exception: Patches do not have a transparency
+  O> crt 1 [set color red]
+  T> palette:set-color-transparency 400 => ERROR Extension exception: Transparency must be in the range from 0 to 100
+  T> palette:set-color-transparency -100 => ERROR Extension exception: Transparency must be in the range from 0 to 100
+
+With-Transparency
+  extensions [palette]
+  red palette:with-transparency 100 => [215 50 41 0]
+  [30 30 30] palette:with-transparency 10 => [30 30 30 229.5]
+  [30 30 30 30] palette:with-transparency 10 => [30 30 30 229.5]
+  red palette:with-transparency -1 => ERROR Extension exception: Transparency must be in the range from 0 to 100
+  red palette:with-transparency 256 => ERROR Extension exception: Transparency must be in the range from 0 to 100
+
+Adjust-Color-Transparency
+  extensions [palette]
+  globals [c]
+  O> crt 2 [set color red]
+  T> palette:adjust-color-transparency 10
+  [color] of turtle 0 => [215 50 41 229.5]
+  T> palette:adjust-color-transparency -100
+  [color] of turtle 0 => [215 50 41 255]
+  T> palette:adjust-color-transparency 200
+  [color] of turtle 0 => [215 50 41 0]
+
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  L> palette:adjust-color-transparency 20
+  [color] of link 0 1 => [215 50 41 204]
+
+Adjust-Color-Transparency-Error_2D
+  extensions [palette]
+  P> palette:adjust-color-transparency 245 => ERROR Extension exception: Patches do not have a transparency
+
+Extract-Hue
+  extensions [palette]
+  palette:extract-hue [160 100 160] => 300
+  palette:extract-hue [160 160 160] => 0
+  palette:extract-hue [160 100 160 100] => 300
+  palette:extract-hue red => 3.103
+  palette:extract-hue [100 100] => ERROR Extension exception: Color must have valid RGB List
+  palette:extract-hue [100 100 100 100 100] => ERROR Extension exception: Color must have valid RGB List
+
+Extract-Saturation
+  extensions [palette]
+  palette:extract-Saturation [160 100 160] => 37.5
+  palette:extract-Saturation [160 160 160] => 0
+  palette:extract-Saturation [160 100 160 100] => 37.5
+  palette:extract-Saturation red => 80.93
+  palette:extract-Saturation [100 100] => ERROR Extension exception: Color must have valid RGB List
+  palette:extract-Saturation [100 100 100 100 100] => ERROR Extension exception: Color must have valid RGB List
+
+Extract-Brightness
+  extensions [palette]
+  palette:extract-brightness [160 100 160] => 62.745
+  palette:extract-brightness [160 160 160] => 62.745
+  palette:extract-brightness [160 100 160 100] => 62.745
+  palette:extract-brightness red => 84.314
+  palette:extract-brightness [100 100] => ERROR Extension exception: Color must have valid RGB List
+  palette:extract-brightness [100 100 100 100 100] => ERROR Extension exception: Color must have valid RGB List
+
+Extract-Red
+  extensions [palette]
+  palette:extract-red [160 100 160] => 160
+  palette:extract-red [160 100 160 100] => 160
+  palette:extract-red red => 215
+  palette:extract-red [100 100] => ERROR Extension exception: Color must have valid RGB List
+  palette:extract-red [100 100 100 100 100] => ERROR Extension exception: Color must have valid RGB List
+
+Extract-Green
+  extensions [palette]
+  palette:extract-green [160 100 160] => 100
+  palette:extract-green [160 100 160 100] => 100
+  palette:extract-green red => 50
+  palette:extract-green [100 100] => ERROR Extension exception: Color must have valid RGB List
+  palette:extract-green [100 100 100 100 100] => ERROR Extension exception: Color must have valid RGB List
+
+Extract-Blue
+  extensions [palette]
+  palette:extract-blue [160 100 160] => 160
+  palette:extract-blue [160 100 160 100] => 160
+  palette:extract-blue red => 41
+  palette:extract-blue [100 100] => ERROR Extension exception: Color must have valid RGB List
+  palette:extract-blue [100 100 100 100 100] => ERROR Extension exception: Color must have valid RGB List
+
+With-Hue
+  extensions [palette]
+  red palette:with-hue blue => [85 215 41]
+  [215 50 41] palette:with-hue blue => [85 215 41]
+  [215 50 41 100] palette:with-hue blue => [85 215 41 100]
+  red palette:with-hue 400 => [215 157 41]
+  red palette:with-hue -1 => [215 41 44]
+  [100 100] palette:with-hue blue => ERROR Extension exception: Color must have valid RGB List
+  [100 100 100 100 100] palette:with-hue blue => ERROR Extension exception: Color must have valid RGB List
+
+With-Saturation
+  extensions [palette]
+  red palette:with-saturation blue => [215 11 0]
+  [215 50 41] palette:with-saturation blue => [215 11 0]
+  [215 50 41 100] palette:with-saturation blue => [215 11 0 100]
+  red palette:with-saturation 50 => [215 113 108]
+  [100 100] palette:with-saturation blue => ERROR Extension exception: Color must have valid RGB List
+  [100 100 100 100 100] palette:with-saturation blue => ERROR Extension exception: Color must have valid RGB List
+
+With-Brightness
+  extensions [palette]
+  red palette:with-brightness 50 => [128 30 24]
+  [215 50 41] palette:with-brightness 50 => [128 30 24]
+  [215 50 41 100] palette:with-brightness 50 => [128 30 24 100]
+  red palette:with-brightness -1 => [0 0 0]
+  red palette:with-brightness 101 => [255 59 49]
+  [100 100] palette:with-brightness blue => ERROR Extension exception: Color must have valid RGB List
+  [100 100 100 100 100] palette:with-brightness blue => ERROR Extension exception: Color must have valid RGB List
+
+With-Red
+  extensions [palette]
+  red palette:with-red 255 => [255 50 41]
+  [215 50 41] palette:with-red 255 => [255 50 41]
+  [215 50 41 100] palette:with-red 255 => [255 50 41 100]
+  red palette:with-red -1 => ERROR Extension exception: Value must be in the range from 0 to 255
+  red palette:with-red 256 => ERROR Extension exception: Value must be in the range from 0 to 255
+  [100 100] palette:with-red blue => ERROR Extension exception: Color must have valid RGB List
+  [100 100 100 100 100] palette:with-red blue => ERROR Extension exception: Color must have valid RGB List
+
+With-Green
+  extensions [palette]
+  red palette:with-green 255 => [215 255 41]
+  [215 50 41] palette:with-green 255 => [215 255 41]
+  [215 50 41 100] palette:with-green 255 => [215 255 41 100]
+  red palette:with-green -1 => ERROR Extension exception: Value must be in the range from 0 to 255
+  red palette:with-green 256 => ERROR Extension exception: Value must be in the range from 0 to 255
+  [100 100] palette:with-green blue => ERROR Extension exception: Color must have valid RGB List
+  [100 100 100 100 100] palette:with-green blue => ERROR Extension exception: Color must have valid RGB List
+
+With-Blue
+  extensions [palette]
+  red palette:with-blue 255 => [215 50 255]
+  [215 50 41] palette:with-blue 255 => [215 50 255]
+  [215 50 41 100] palette:with-blue 255 => [215 50 255 100]
+  red palette:with-blue -1 => ERROR Extension exception: Value must be in the range from 0 to 255
+  red palette:with-blue 256 => ERROR Extension exception: Value must be in the range from 0 to 255
+  [100 100] palette:with-blue blue => ERROR Extension exception: Color must have valid RGB List
+  [100 100 100 100 100] palette:with-blue blue => ERROR Extension exception: Color must have valid RGB List
+
+Hue-updated
+  extensions [palette]
+  palette:hue-updated red blue => [85 215 41]
+  palette:hue-updated [215 50 41] blue => [85 215 41]
+  palette:hue-updated [215 50 41 100] blue => [85 215 41 100]
+  palette:hue-updated red 400 => [215 157 41]
+  palette:hue-updated red -1 => [215 41 44]
+  palette:hue-updated [100 100] blue => ERROR Extension exception: Color must have valid RGB List
+  palette:hue-updated [100 100 100 100 100] blue => ERROR Extension exception: Color must have valid RGB List
+
+Saturation-Updated
+  extensions [palette]
+  palette:saturation-updated red blue => [215 11 0]
+  palette:saturation-updated [215 50 41] blue => [215 11 0]
+  palette:saturation-updated [215 50 41 100] blue => [215 11 0 100]
+  palette:saturation-updated red 400 => [215 11 0]
+  palette:saturation-updated [100 100] blue => ERROR Extension exception: Color must have valid RGB List
+  palette:saturation-updated [100 100 100 100 100] blue => ERROR Extension exception: Color must have valid RGB List
+
+Brightness-Updated
+  extensions [palette]
+  palette:brightness-updated red 50 => [128 30 24]
+  palette:brightness-updated [215 50 41] 50 => [128 30 24]
+  palette:brightness-updated [215 50 41 100] 50 => [128 30 24 100]
+  palette:brightness-updated red 400 =>  [255 59 49]
+  palette:brightness-updated red -1 => [0 0 0]
+  palette:brightness-updated [100 100] blue => ERROR Extension exception: Color must have valid RGB List
+  palette:brightness-updated [100 100 100 100 100] blue => ERROR Extension exception: Color must have valid RGB List
+
+Red-Updated
+  extensions [palette]
+  palette:red-updated red 255 => [255 50 41]
+  palette:red-updated [215 50 41] 255 => [255 50 41]
+  palette:red-updated [215 50 41 100] 255 => [255 50 41 100]
+  palette:red-updated red -1 => ERROR Extension exception: Value must be in the range from 0 to 255
+  palette:red-updated red 256 => ERROR Extension exception: Value must be in the range from 0 to 255
+  palette:red-updated [100 100] blue => ERROR Extension exception: Color must have valid RGB List
+  palette:red-updated [100 100 100 100 100] blue => ERROR Extension exception: Color must have valid RGB List
+
+Green-Updated
+  extensions [palette]
+  palette:green-updated red 255 => [215 255 41]
+  palette:green-updated [215 50 41] 255 => [215 255 41]
+  palette:green-updated [215 50 41 100] 255 => [215 255 41 100]
+  palette:green-updated red -1 => ERROR Extension exception: Value must be in the range from 0 to 255
+  palette:green-updated red 256 => ERROR Extension exception: Value must be in the range from 0 to 255
+  palette:green-updated [100 100] blue => ERROR Extension exception: Color must have valid RGB List
+  palette:green-updated [100 100 100 100 100] blue => ERROR Extension exception: Color must have valid RGB List
+
+Blue-Updated
+  extensions [palette]
+  palette:blue-updated red 255 => [215 50 255]
+  palette:blue-updated [215 50 41] 255 => [215 50 255]
+  palette:blue-updated [215 50 41 100] 255 => [215 50 255 100]
+  palette:blue-updated red -1 => ERROR Extension exception: Value must be in the range from 0 to 255
+  palette:blue-updated red 256 => ERROR Extension exception: Value must be in the range from 0 to 255
+  palette:blue-updated [100 100] blue => ERROR Extension exception: Color must have valid RGB List
+  palette:blue-updated [100 100 100 100 100] blue => ERROR Extension exception: Color must have valid RGB List
+
+Get-Color-Hue
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+  [palette:get-color-hue] of turtle 0 => 3.103
+  [palette:get-color-hue] of link 0 1 => 3.103
+  [palette:get-color-hue] of patch 0 0 => 3.103
+
+Get-Color-Saturation
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+  [palette:get-color-saturation] of turtle 0 => 80.93
+  [palette:get-color-saturation] of link 0 1 => 80.93
+  [palette:get-color-saturation] of patch 0 0 => 80.93
+
+Get-Color-Brightness
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+  [palette:get-color-brightness] of turtle 0 => 84.314
+  [palette:get-color-brightness] of link 0 1 => 84.314
+  [palette:get-color-brightness] of patch 0 0 => 84.314
+
+Get-Color-Red
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+  [palette:get-color-red] of turtle 0 => 215
+  [palette:get-color-red] of link 0 1 => 215
+  [palette:get-color-red] of patch 0 0 => 215
+
+Get-Color-Green
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+  [palette:get-color-green] of turtle 0 => 50
+  [palette:get-color-green] of link 0 1 => 50
+  [palette:get-color-green] of patch 0 0 => 50
+
+Get-Color-Blue
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+  [palette:get-color-blue] of turtle 0 => 41
+  [palette:get-color-blue] of link 0 1 => 41
+  [palette:get-color-blue] of patch 0 0 => 41
+
+Set-Color-Hue
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+
+  T> palette:set-color-hue 100
+  P> palette:set-color-hue 100
+  L> palette:set-color-hue 100
+
+  [color] of turtle 0 => [99 215 41]
+  [color] of link 0 1 => [99 215 41]
+  [pcolor] of patch 0 0 => [99 215 41]
+
+  O> ask turtle 0 [set color [215 50 41 100]]
+  T> palette:set-color-hue 100
+  [color] of turtle 0 => [99 215 41 100]
+
+  T> set color red
+  T> palette:set-color-hue -260 => ERROR Extension exception: Hue must be in the range from 0 to 360
+  T> palette:set-color-hue 400 => ERROR Extension exception: Hue must be in the range from 0 to 360
+
+Set-Color-Saturation
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+
+  T> palette:set-color-saturation 50
+  P> palette:set-color-saturation 50
+  L> palette:set-color-saturation 50
+
+  [color] of turtle 0 => [215 113 108]
+  [color] of link 0 1 => [215 113 108]
+  [pcolor] of patch 0 0 => [215 113 108]
+
+  O> ask turtle 0 [set color [215 50 41 100]]
+  T> palette:set-color-saturation 50
+  [color] of turtle 0 => [215 113 108 100]
+
+  T> set color red
+  T> palette:set-color-saturation -260 => ERROR Extension exception: Saturation must be in the range from 0 to 100
+  T> palette:set-color-saturation 400 => ERROR Extension exception: Saturation must be in the range from 0 to 100
+
+Set-Color-Brightness
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+
+  T> palette:set-color-brightness 50
+  P> palette:set-color-brightness 50
+  L> palette:set-color-brightness 50
+
+  [color] of turtle 0 => [128 30 24]
+  [color] of link 0 1 => [128 30 24]
+  [pcolor] of patch 0 0 => [128 30 24]
+
+  O> ask turtle 0 [set color [215 50 41 100]]
+  T> palette:set-color-brightness 50
+  [color] of turtle 0 => [128 30 24 100]
+
+  T> set color red
+  T> palette:set-color-brightness -260 => ERROR Extension exception: Brightness must be in the range from 0 to 100
+  T> palette:set-color-brightness 400 => ERROR Extension exception: Brightness must be in the range from 0 to 100
+
+Set-Color-Red
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+
+  T> palette:set-color-red 255
+  P> palette:set-color-red 255
+  L> palette:set-color-red 255
+
+  [color] of turtle 0 => [255 50 41]
+  [color] of link 0 1 => [255 50 41]
+  [pcolor] of patch 0 0 => [255 50 41]
+
+  O> ask turtle 0 [set color [215 50 41 100]]
+  T> palette:set-color-red 255
+  [color] of turtle 0 => [255 50 41 100]
+
+  T> set color red
+  T> palette:set-color-red -260 => ERROR Extension exception: Value must be in the range from 0 to 255
+  T> palette:set-color-red 400 => ERROR Extension exception: Value must be in the range from 0 to 255
+
+Set-Color-Green
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+
+  T> palette:set-color-green 255
+  P> palette:set-color-green 255
+  L> palette:set-color-green 255
+
+  [color] of turtle 0 => [215 255 41]
+  [color] of link 0 1 => [215 255 41]
+  [pcolor] of patch 0 0 => [215 255 41]
+
+  O> ask turtle 0 [set color [215 50 41 100]]
+  T> palette:set-color-green 255
+  [color] of turtle 0 => [215 255 41 100]
+
+  T> set color red
+  T> palette:set-color-green -260 => ERROR Extension exception: Value must be in the range from 0 to 255
+  T> palette:set-color-green 400 => ERROR Extension exception: Value must be in the range from 0 to 255
+
+Set-Color-Blue
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+
+  T> palette:set-color-blue 255
+  P> palette:set-color-blue 255
+  L> palette:set-color-blue 255
+
+  [color] of turtle 0 => [215 50 255]
+  [color] of link 0 1 => [215 50 255]
+  [pcolor] of patch 0 0 => [215 50 255]
+
+  O> ask turtle 0 [set color [215 50 41 100]]
+  T> palette:set-color-blue 255
+  [color] of turtle 0 => [215 50 255 100]
+
+  T> set color red
+  T> palette:set-color-blue -260 => ERROR Extension exception: Value must be in the range from 0 to 255
+  T> palette:set-color-blue 400 => ERROR Extension exception: Value must be in the range from 0 to 255
+
+Adjust-Color-Hue
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+
+  T> palette:adjust-color-hue 100 palette:adjust-color-hue -3.103
+  L> palette:adjust-color-hue 100 palette:adjust-color-hue -3.103
+  P> palette:adjust-color-hue 100 palette:adjust-color-hue -3.103
+  [color] of turtle 0 => [99 215 41]
+  [color] of link 0 1 => [99 215 41]
+  [pcolor] of patch 0 0 => [99 215 41]
+
+  T> palette:adjust-color-hue 360
+  [color] of turtle 0 => [99 215 41]
+  T> palette:adjust-color-hue -360
+  [color] of turtle 0 => [99 215 41]
+
+  T> set color [215 50 41 100]
+  T> palette:adjust-color-hue 100 palette:adjust-color-hue -3.103
+  [color] of turtle 0 => [99 215 41 100]
+
+Adjust-Color-Saturation
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+
+  T> palette:adjust-color-saturation 50 palette:adjust-color-saturation -80.93
+  L> palette:adjust-color-saturation 50 palette:adjust-color-saturation -80.93
+  P> palette:adjust-color-saturation 50 palette:adjust-color-saturation -80.93
+  [color] of turtle 0 => [215 176 174]
+  [color] of link 0 1 => [215 176 174]
+  [pcolor] of patch 0 0 => [215 176 174]
+
+  T> palette:adjust-color-saturation 110
+  [color] of turtle 0 => [215 10 0]
+
+  T> set color [215 50 41 100]
+  T> palette:adjust-color-saturation 50 palette:adjust-color-saturation -80.93
+  [color] of turtle 0 => [215 176 174 100]
+
+Adjust-Color-Brightness
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+
+  T> palette:adjust-color-brightness 50
+  L> palette:adjust-color-brightness 50
+  P> palette:adjust-color-brightness 50
+  [color] of turtle 0 => [255 59 49]
+  [color] of link 0 1 => [255 59 49]
+  [pcolor] of patch 0 0 => [255 59 49]
+
+  T> palette:adjust-color-brightness 110
+  [color] of turtle 0 => [255 59 49]
+
+  T> set color [215 50 41 100]
+  T> palette:adjust-color-brightness 50
+  [color] of turtle 0 => [255 59 49 100]
+
+Adjust-Color-Red
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+
+  T> palette:adjust-color-red -20
+  L> palette:adjust-color-red -20
+  P> palette:adjust-color-red -20
+  [color] of turtle 0 => [195 50 41]
+  [color] of link 0 1 => [195 50 41]
+  [pcolor] of patch 0 0 => [195 50 41]
+
+  T> palette:adjust-color-red 310
+  [color] of turtle 0 => [255 50 41]
+
+  T> set color [215 50 41 100]
+  T> palette:adjust-color-red -300
+  [color] of turtle 0 => [0 50 41 100]
+
+Adjust-Color-Green
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+
+  T> palette:adjust-color-green -20
+  L> palette:adjust-color-green -20
+  P> palette:adjust-color-green -20
+  [color] of turtle 0 => [215 30 41]
+  [color] of link 0 1 => [215 30 41]
+  [pcolor] of patch 0 0 => [215 30 41]
+
+  T> palette:adjust-color-green 310
+  [color] of turtle 0 => [215 255 41]
+
+  T> set color [215 50 41 100]
+  T> palette:adjust-color-green -300
+  [color] of turtle 0 => [215 0 41 100]
+
+Adjust-Color-Blue
+  extensions [palette]
+  O> crt 2 [set color red]
+  O> ask turtle 0 [create-link-to turtle 1]
+  L> set color red
+  P> set pcolor red
+
+  T> palette:adjust-color-blue -20
+  L> palette:adjust-color-blue -20
+  P> palette:adjust-color-blue -20
+  [color] of turtle 0 => [215 50 21]
+  [color] of link 0 1 => [215 50 21]
+  [pcolor] of patch 0 0 => [215 50 21]
+
+  T> palette:adjust-color-blue 310
+  [color] of turtle 0 => [215 50 255]
+
+  T> set color [215 50 41 100]
+  T> palette:adjust-color-blue -300
+  [color] of turtle 0 => [215 50 0 100]

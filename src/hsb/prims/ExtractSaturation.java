@@ -19,27 +19,13 @@ public class ExtractSaturation implements Reporter {
   }
 
   public Object report(Argument args[], Context context) throws ExtensionException {
+    ColorManager cm = new ColorManager();
     LogoList rgb;
-    double color = 0;
-
     try{
-      color = args[0].getDoubleValue();
-      rgb = Color.getRGBListByARGB(Color.getARGBbyPremodulatedColorNumber(Color.modulateDouble(color)));
+        rgb = cm.extractColorFromArg(args[0]);
     }
     catch(ExtensionException e){
-      org.nlogo.api.Exceptions.ignore(e);
-      try{
-        rgb = args[0].getList();
-        try{
-          Color.validRGBList(rgb, true);
-        }
-        catch(AgentException a){
-          throw new ExtensionException("Color must have valid RGB List");
-        }
-      }
-      catch(ExtensionException e2){
-        throw new ExtensionException(e2);
-      }
+      throw new ExtensionException(e.getMessage());
     }
     ExtractHSB extractor = new ExtractHSB();
     return extractor.extract(rgb, 1);

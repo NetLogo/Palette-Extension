@@ -12,8 +12,6 @@ import org.nlogo.api.Color;
 
 public class ExtractAlpha implements Reporter {
 
-  private LogoList the_color = null;
-
   public Syntax getSyntax(){
     int[] values = {
       Syntax.NumberType() | Syntax.ListType() // color
@@ -26,18 +24,9 @@ public class ExtractAlpha implements Reporter {
     throws ExtensionException{
 
     double alpha = 255;
-
-    try{
-      the_color = args[0].getList();
-    }
-    catch(ExtensionException e){
-      org.nlogo.api.Exceptions.ignore( e ) ;
-      return alpha;
-    }
-
-    //org.nlogo.api.Color.validRGBList(the_color, true); //not working
-  //  catch(ExtensionException e){throw new ExtensionException(e.getMessage());}
-
+    LogoList the_color;
+    ColorManager cm = new ColorManager();
+    the_color = cm.extractColorFromArg(args[0]);
     if(the_color.length() >= 4){
       alpha = (Double) the_color.get(3);
     }
