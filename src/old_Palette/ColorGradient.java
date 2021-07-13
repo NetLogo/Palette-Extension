@@ -11,7 +11,7 @@ public class ColorGradient extends BufferedImage{
 	public ColorGradient (Color startColor, Color endColor, int width)
 	{
 		super(width, 1, BufferedImage.TYPE_INT_RGB);
-		System.out.println("startColor: " + startColor);
+		//System.out.println("startColor: " + startColor);
 		//System.out.println("endColor: " + endColor );
 		//System.out.println("width: "  + width);
 		GradientPaint gradientPaint = new GradientPaint(0, 0, startColor,

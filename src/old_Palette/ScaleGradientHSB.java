@@ -12,7 +12,7 @@ import org.nlogo.core.SyntaxJ;
 import org.nlogo.api.Color;
 
 
-public class ScaleGradient implements Reporter
+public class ScaleGradientHSB implements Reporter
 {
 
 	// Primitive arguments
@@ -27,7 +27,7 @@ public class ScaleGradient implements Reporter
 
 	// Static variables for cache handling
 	private static LogoList colorLogoListCache = null ;
-	private static int[][] gradientArray =  null;
+	private static double[][] gradientArray =  null;
 
 	public Syntax getSyntax()
 	{
@@ -61,17 +61,14 @@ public class ScaleGradient implements Reporter
 
 		// Validate colorList rgb arguments
 		for(int i = 0; i < colorLogoList.length(); i++){
-			LogoList RGBList;
+			LogoList HSBList;
 			if(colorLogoList.get(i) instanceof Double){
-				RGBList = Color.getRGBListByARGB(Color.getARGBbyPremodulatedColorNumber(Color.modulateDouble((double) colorLogoList.get(i))));
+				throw new ExtensionException("Detected double as input, must input HSB lists for scale-gradient-hsb");
 			}
 			else{
-				RGBList = (LogoList) colorLogoList.get(i);
+				HSBList = (LogoList) colorLogoList.get(i);
 			}
-			if(RGBList.length() == 4) {
-				RGBList = RGBList.butLast();
-			}
-			validRGBList(RGBList);
+			validHSBList(HSBList);
 		}
 
 		// Normalize var, min, max
@@ -131,43 +128,34 @@ public class ScaleGradient implements Reporter
 
 			// Create an array containing color instances of the arguments
 			Iterator<Object> it = colorLogoList.javaIterator();
-			ArrayList<Object> colorList = new ArrayList<Object>();
+			LogoListBuilder colorList = new LogoListBuilder();
 			it = colorLogoList.javaIterator ();
 			for(int i = 0; i < colorLogoList.length(); i++)
 			{
-				LogoList RGBList;
-				if(colorLogoList.get(i) instanceof Double){
-					RGBList = Color.getRGBListByARGB(Color.getARGBbyPremodulatedColorNumber(Color.modulateDouble((double) colorLogoList.get(i))));
-				}
-				else{
-					RGBList = (LogoList) colorLogoList.get(i);
-				}
-				//LogoList RGBList = (LogoList) it.next();
-				if(RGBList.length() == 4) {
-					RGBList = RGBList.butLast();
-				}
-				java.awt.Color color = new java.awt.Color
-				(
-						( (Double) RGBList.get(0) ).intValue() ,
-						( (Double) RGBList.get(1) ).intValue() ,
-						( (Double) RGBList.get(2) ).intValue()
-				);
-				colorList.add( color );
+				colorList.add((LogoList) colorLogoList.get(i));
 			}
+      LogoList inputHSB = colorList.toLogoList();
 
 			// Create array with resulting gradient color instances
-
-
-			gradientArray = new int [SIZE * (colorList.size() - 1) ] [3];
-			for (int i = 0; i < (colorList.size() - 1) ; i++)
+			gradientArray = new double [SIZE * (inputHSB.length() - 1) ] [3];
+			for (int i = 0; i < (inputHSB.length() - 1) ; i++)
 			{
-				ColorGradient colorGradient = new ColorGradient(
-						(java.awt.Color) colorList.get(i),
-						(java.awt.Color) colorList.get(i + 1) ,
-						SIZE) ;
+				ColorGradientHSB colorGradient = new ColorGradientHSB(); // make the generate HSB gradient here, ignore case 1, add that manually
+        LogoList ll1 = (LogoList) inputHSB.get(i); LogoList ll2 = (LogoList) inputHSB.get(i+1);
+        double[] color1 = new double[3]; color1[0] = (double) ll1.get(0);
+        color1[1] = (double) ll1.get(1); color1[2] = (double) ll1.get(2);
+        double[] color2 = new double[3]; color2[0] = (double) ll2.get(0);
+        color2[1] = (double) ll2.get(1); color2[2] = (double) ll2.get(2);
+
+        colorGradient.genArray(color1, color2, SIZE);
 				for (int j = 0; j < SIZE ; j++)
 				{
-					gradientArray[j+ (SIZE * i)] = colorGradient.getGradientRGBArray()[j];
+					gradientArray[j+ (SIZE * i)] = colorGradient.getHSBArray()[j];
+          LogoListBuilder toRGB = new LogoListBuilder();
+					for(int k = 0; k < 3; k++) { toRGB.add(gradientArray[j+ (SIZE * i)][k]); }
+					HSBUpdated hu = new HSBUpdated();
+					LogoList rgb = hu.HSBtoRGB(toRGB.toLogoList());
+					for(int k = 0; k < 3; k++) { gradientArray[j+ (SIZE * i)][k] = (double) rgb.get(k); }
 				}
 			}
 		}
@@ -198,7 +186,22 @@ public class ScaleGradient implements Reporter
 			throw new ExtensionException( "RGB values must be 0-255" ) ;
 		}
 	}
-
+	void validHSBList( LogoList hsb ) throws ExtensionException {
+		if(hsb.size() !=  3){
+			throw new ExtensionException("HSB must have three elements");
+		}
+		else{
+			if((double) hsb.get(0) < 0 || (double) hsb.get(0) > 360) {
+				throw new  ExtensionException("Hue must be in the range from 0 to 360");
+			}
+			if((double) hsb.get(1) < 0 || (double) hsb.get(1) > 100) {
+				throw new  ExtensionException("Saturation must be in the range from 0 to 100");
+			}
+			if((double) hsb.get(2) < 0 || (double) hsb.get(2) > 100) {
+				throw new  ExtensionException("Brightness must be in the range from 0 to 100");
+			}
+		}
+	}
 	void validRGBList( LogoList rgb )
 	throws ExtensionException
 	{

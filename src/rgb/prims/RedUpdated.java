@@ -9,7 +9,7 @@ import org.nlogo.core.LogoList;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
 
-public class HueUpdated implements Reporter{
+public class RedUpdated implements Reporter {
   public Syntax getSyntax(){
     int[] values = {
       Syntax.NumberType() | Syntax.ListType(),
@@ -18,6 +18,7 @@ public class HueUpdated implements Reporter{
     int ret = Syntax.ListType();
     return SyntaxJ.reporterSyntax(values, ret, 2);
   }
+
   public Object report(Argument args[], Context context) throws ExtensionException {
     ColorManager cm = new ColorManager();
     LogoList rgb;
@@ -36,7 +37,10 @@ public class HueUpdated implements Reporter{
     catch(ExtensionException e){
       throw new ExtensionException(e.getMessage());
     }
-    HSBUpdated update = new HSBUpdated();
-    return update.updateHSB(rgb, newHue, 0); // now that input is managed, we do most of the work here
+    if(newHue > 255 || newHue < 0){
+      throw new ExtensionException("Value must be in the range from 0 to 255");
+    }
+    RGBUpdated update = new RGBUpdated();
+    return update.updateRGB(rgb, newHue, 0); // now that input is managed, we do most of the work here
   }
 }

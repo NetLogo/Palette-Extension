@@ -9,25 +9,16 @@ import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
 
 
-public class ExtractBrightness implements Reporter {
+public class GetColorGreen implements Reporter {
   public Syntax getSyntax() {
-    int[] values = {
-      Syntax.NumberType() | Syntax.ListType()
-    };
+    int[] values = {};
     int ret = Syntax.NumberType();
-    return SyntaxJ.reporterSyntax(values, ret, 1);
+    return SyntaxJ.reporterSyntax(values, ret, "-TPL");
   }
 
   public Object report(Argument args[], Context context) throws ExtensionException {
     ColorManager cm = new ColorManager();
-    LogoList rgb;
-    try{
-        rgb = cm.extractColorFromArg(args[0]);
-    }
-    catch(ExtensionException e){
-      throw new ExtensionException(e.getMessage());
-    }
-    ExtractHSB extractor = new ExtractHSB();
-    return extractor.extract(rgb, 2);
+    LogoList rgb = cm.getAgentColor(context);
+    return rgb.get(1);
   }
 }
