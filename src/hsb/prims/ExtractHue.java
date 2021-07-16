@@ -19,15 +19,15 @@ public class ExtractHue implements Reporter {
   }
 
   public Object report(Argument args[], Context context) throws ExtensionException {
-    ColorManager cm = new ColorManager();
+    ColorManager colorManager = new ColorManager();
     LogoList rgb;
     try{
-        rgb = cm.extractColorFromArg(args[0]);
+        rgb = colorManager.extractColorFromArg(args[0]);
     }
     catch(ExtensionException e){
       throw new ExtensionException(e.getMessage());
     }
-    ExtractHSB extractor = new ExtractHSB();
-    return extractor.extract(rgb, 0);
+    ExtractHSB extracthsb = new ExtractHSB();
+    return extracthsb.extract(rgb, 0);
   }
 }

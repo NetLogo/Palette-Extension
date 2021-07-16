@@ -24,9 +24,8 @@ public class ExtractAlpha implements Reporter {
     throws ExtensionException{
 
     double alpha = 255;
-    LogoList the_color;
-    ColorManager cm = new ColorManager();
-    the_color = cm.extractColorFromArg(args[0]);
+    ColorManager colorManager = new ColorManager();
+    LogoList the_color = colorManager.extractColorFromArg(args[0]);
     if(the_color.length() >= 4){
       alpha = (Double) the_color.get(3);
     }

@@ -9,7 +9,7 @@ import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
 
 
-public class GetColorGreen implements Reporter {
+public class GetAgentBlue implements Reporter {
   public Syntax getSyntax() {
     int[] values = {};
     int ret = Syntax.NumberType();
@@ -19,6 +19,6 @@ public class GetColorGreen implements Reporter {
   public Object report(Argument args[], Context context) throws ExtensionException {
     ColorManager cm = new ColorManager();
     LogoList rgb = cm.getAgentColor(context);
-    return rgb.get(1);
+    return rgb.get(2);
   }
 }

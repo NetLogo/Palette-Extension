@@ -6,6 +6,9 @@ import org.nlogo.api.Context;
 import org.nlogo.api.ExtensionException;
 import org.nlogo.core.LogoList;
 
+// [color] palette:with-component [number]
+// changes the component of the color to number while leaving the other components in the same colorspace unchanged
+
 public class WithSaturation implements Reporter {
   public Syntax getSyntax(){
     int left = Syntax.NumberType() | Syntax.ListType();
@@ -14,14 +17,24 @@ public class WithSaturation implements Reporter {
     return SyntaxJ.reporterSyntax(left, values, ret, Syntax.NormalPrecedence());
   }
   public Object report(Argument args[], Context context) throws ExtensionException {
-    SaturationUpdated su = new SaturationUpdated();
-    LogoList ll;
-    try{
-      ll = (LogoList) su.report(args, context);
+    ColorManager colorManager = new ColorManager();
+    LogoList rgb;
+
+    try{ // testing input
+      rgb = colorManager.extractColorFromArg(args[0]);
     }
     catch(ExtensionException e){
       throw new ExtensionException(e.getMessage());
     }
-    return ll;
+
+    double newVal = 0;
+    try{
+      newVal = args[1].getDoubleValue();
+    }
+    catch(ExtensionException e){
+      throw new ExtensionException(e.getMessage());
+    }
+    HSBUpdated hsbupdated = new HSBUpdated();
+    return hsbupdated.updateHSB(rgb, newVal, 1);
   }
 }

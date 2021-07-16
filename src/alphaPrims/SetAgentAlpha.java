@@ -15,30 +15,43 @@ import org.nlogo.core.SyntaxJ;
 import org.nlogo.api.ExtensionException;
 import org.nlogo.api.Agent;
 
-public class SetColorTransparency implements Command{
+public class SetAgentAlpha implements Command{
   public Syntax getSyntax() {
     int values[] = {Syntax.NumberType()};
     return SyntaxJ.commandSyntax(values, "-TPL");
   }
+
   public void perform(Argument args[], Context context) throws ExtensionException {
-    ColorManager cm = new ColorManager();
-    LogoList the_rgbcolor = cm.getAgentColor(context);
     double alpha = 255;
-  //  _extractrgb ergb = new _extractrgb();
     try{
       alpha = args[0].getDoubleValue();
     }
     catch(ExtensionException e){
       throw new ExtensionException(e.getMessage());
     }
-    if(alpha < 0 || alpha > 100){
-      throw new ExtensionException("Transparency must be in the range from 0 to 100");
-    }
     if(context.getAgent().kind() == AgentKindJ.Patch() && !org.nlogo.api.Version$.MODULE$.is3D()){
-      throw new ExtensionException("Patches do not have a transparency");
+      throw new ExtensionException("Alpha for 2D patches cannot be changed.");
     }
-    alpha = 255 * (1 - alpha / 100);
-    SetColorAlpha sca = new SetColorAlpha();
-    sca.sca(context, alpha);
+    if(alpha < 0 || alpha > 255){
+      throw new ExtensionException("Alpha must be in the range from 0 to 255.");
+    }
+    setColor(context, alpha);
   }
+
+  public void setColor(Context context, double alpha) throws ExtensionException {
+    ColorManager colorManager = new ColorManager();
+    LogoList rgb = colorManager.getAgentColor(context);
+    LogoListBuilder newColor = new LogoListBuilder();
+    for(int i = 0; i < 3; i++){
+      newColor.add(rgb.get(i));
+    }
+    newColor.add(alpha);
+    try{
+      colorManager.setAgentColor(context, newColor.toLogoList());
+    }
+    catch(ExtensionException e){
+      throw new ExtensionException(e.getMessage());
+    }
+  }
+
 }

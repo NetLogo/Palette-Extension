@@ -6,7 +6,7 @@ import org.nlogo.core.LogoList;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
 
-public class GetColorSaturation implements Reporter {
+public class GetAgentSaturation implements Reporter {
   public Syntax getSyntax(){
     int values[] = {};
     int ret = Syntax.NumberType();
@@ -14,9 +14,9 @@ public class GetColorSaturation implements Reporter {
   }
 
   public Object report(Argument args[], Context context){
-    ColorManager cm = new ColorManager();
-    ExtractHSB extractor = new ExtractHSB();
-    LogoList rgb = cm.getAgentColor(context);
-    return extractor.extract(rgb, 1);
+    ColorManager colorManager = new ColorManager();
+    ExtractHSB extracthsb = new ExtractHSB();
+    LogoList rgb = colorManager.getAgentColor(context);
+    return extracthsb.extract(rgb, 1);
   }
 }

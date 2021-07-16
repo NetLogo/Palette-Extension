@@ -13,21 +13,21 @@ import org.nlogo.core.LogoList;
 
 public class AdjustColorHSB {
   public void adjust(Context context, double modifier, int ind) throws ExtensionException {
-    ColorManager cm = new ColorManager();
-    LogoList rgb = cm.getAgentColor(context);
+    ColorManager colorManager = new ColorManager();
+    LogoList rgb = colorManager.getAgentColor(context);
     rgb = getNewColor(rgb, modifier, ind);
-    cm.setAgentColor(context, rgb);
+    colorManager.setAgentColor(context, rgb);
   }
 
   public LogoList getNewColor(LogoList rgb, double modifier, int ind){ //get new color to set
-    ExtractHSB extract = new ExtractHSB();
-    double val = extract.extract(rgb, ind) + modifier;
+    ExtractHSB extracthsb = new ExtractHSB();
+    double val = extracthsb.extract(rgb, ind) + modifier;
     if(ind == 0) { val = modDouble(val, 360); }
     else if(ind == 1){ val = Math.min(100, Math.max(val, 0)); }
     else { val = Math.min(100, Math.max(val, 5)); }
 
-    HSBUpdated update = new HSBUpdated();
-    rgb = update.updateHSB(rgb, val, ind);
+    HSBUpdated hsbupdated = new HSBUpdated();
+    rgb = hsbupdated.updateHSB(rgb, val, ind);
     return rgb;
   }
 
