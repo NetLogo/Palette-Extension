@@ -82,7 +82,7 @@ public class ColorManager {
           Color.validRGBList(rgb, true);
         }
         catch(AgentException a){
-          throw new ExtensionException("Colors must have valid RGB List.");
+          throw new ExtensionException("Color must have a valid RGB List.");
         }
       }
       catch(ExtensionException e2){
