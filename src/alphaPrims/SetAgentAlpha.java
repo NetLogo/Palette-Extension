@@ -15,7 +15,7 @@ import org.nlogo.core.SyntaxJ;
 import org.nlogo.api.ExtensionException;
 import org.nlogo.api.Agent;
 
-public class SetAgentAlpha implements Command{
+public class SetAgentAlpha implements Command {
   public Syntax getSyntax() {
     int values[] = {Syntax.NumberType()};
     return SyntaxJ.commandSyntax(values, "-TPL");
@@ -23,16 +23,16 @@ public class SetAgentAlpha implements Command{
 
   public void perform(Argument args[], Context context) throws ExtensionException {
     double alpha = 255;
-    try{
+    try {
       alpha = args[0].getDoubleValue();
     }
-    catch(ExtensionException e){
+    catch(ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
-    if(context.getAgent().kind() == AgentKindJ.Patch() && !org.nlogo.api.Version$.MODULE$.is3D()){
+    if(context.getAgent().kind() == AgentKindJ.Patch() && !org.nlogo.api.Version$.MODULE$.is3D()) {
       throw new ExtensionException("Alpha for 2D patches cannot be changed.");
     }
-    if(alpha < 0 || alpha > 255){
+    if(alpha < 0 || alpha > 255) {
       throw new ExtensionException("Alpha must be in the range from 0 to 255.");
     }
     setColor(context, alpha);
@@ -42,14 +42,14 @@ public class SetAgentAlpha implements Command{
     ColorManager colorManager = new ColorManager();
     LogoList rgb = colorManager.getAgentColor(context);
     LogoListBuilder newColor = new LogoListBuilder();
-    for(int i = 0; i < 3; i++){
+    for(int i = 0; i < 3; i++) {
       newColor.add(rgb.get(i));
     }
     newColor.add(alpha);
-    try{
+    try {
       colorManager.setAgentColor(context, newColor.toLogoList());
     }
-    catch(ExtensionException e){
+    catch(ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
   }

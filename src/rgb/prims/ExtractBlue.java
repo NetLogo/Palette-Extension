@@ -19,12 +19,12 @@ public class ExtractBlue implements Reporter {
   }
 
   public Object report(Argument args[], Context context) throws ExtensionException {
-    ColorManager cm = new ColorManager();
+    ColorManager colorManager = new ColorManager();
     LogoList rgb;
-    try{
-        rgb = cm.extractColorFromArg(args[0]);
+    try {
+        rgb = colorManager.extractColorFromArg(args[0]);
     }
-    catch(ExtensionException e){
+    catch(ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
     return rgb.get(2);

@@ -7,13 +7,13 @@ import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
 
 public class GetAgentSaturation implements Reporter {
-  public Syntax getSyntax(){
+  public Syntax getSyntax() {
     int values[] = {};
     int ret = Syntax.NumberType();
     return SyntaxJ.reporterSyntax(values, ret, "-TPL");
   }
 
-  public Object report(Argument args[], Context context){
+  public Object report(Argument args[], Context context) {
     ColorManager colorManager = new ColorManager();
     ExtractHSB extracthsb = new ExtractHSB();
     LogoList rgb = colorManager.getAgentColor(context);

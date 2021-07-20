@@ -7,8 +7,8 @@ import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
 import org.nlogo.api.ExtensionException;
 
-public class SetAgentHue implements Command{
-  public Syntax getSyntax(){
+public class SetAgentHue implements Command {
+  public Syntax getSyntax() {
     int values[] = {Syntax.NumberType()};
     return SyntaxJ.commandSyntax(values, "-TPL");
   }
@@ -18,13 +18,13 @@ public class SetAgentHue implements Command{
     HSBUpdated hsbupdated = new HSBUpdated();
 
     double newValue = 0;
-    try{
+    try {
       newValue = args[0].getDoubleValue();
     }
-    catch(ExtensionException e){
+    catch(ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
-    if(newValue < 0 || newValue > 360){
+    if(newValue < 0 || newValue > 360) {
       throw new ExtensionException("Hue must be in the range from 0 to 360.");
     }
     LogoList rgb = colorManager.getAgentColor(context);

@@ -60,9 +60,9 @@ public class ScaleGradientHSB implements Reporter
 		}
 
 		// Validate colorList rgb arguments
-		for(int i = 0; i < colorLogoList.length(); i++){
+		for(int i = 0; i < colorLogoList.length(); i++) {
 			LogoList HSBList;
-			if(colorLogoList.get(i) instanceof Double){
+			if(colorLogoList.get(i) instanceof Double) {
 				throw new ExtensionException("Detected double as input, must input HSB lists for scale-gradient-hsb");
 			}
 			else{
@@ -187,7 +187,7 @@ public class ScaleGradientHSB implements Reporter
 		}
 	}
 	void validHSBList( LogoList hsb ) throws ExtensionException {
-		if(hsb.size() !=  3){
+		if(hsb.size() !=  3) {
 			throw new ExtensionException("HSB must have three elements");
 		}
 		else{

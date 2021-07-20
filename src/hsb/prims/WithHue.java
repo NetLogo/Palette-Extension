@@ -10,7 +10,7 @@ import org.nlogo.core.LogoList;
 // changes the component of the color to number while leaving the other components in the same colorspace unchanged
 
 public class WithHue implements Reporter {
-  public Syntax getSyntax(){
+  public Syntax getSyntax() {
     int left = Syntax.NumberType() | Syntax.ListType();
     int values[] = {Syntax.NumberType()};
     int ret = Syntax.ListType();
@@ -20,18 +20,18 @@ public class WithHue implements Reporter {
     ColorManager colorManager = new ColorManager();
     LogoList rgb;
 
-    try{ // testing input
+    try { // testing input
       rgb = colorManager.extractColorFromArg(args[0]);
     }
-    catch(ExtensionException e){
+    catch(ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
 
     double newVal = 0;
-    try{
+    try {
       newVal = args[1].getDoubleValue();
     }
-    catch(ExtensionException e){
+    catch(ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
     HSBUpdated hsbupdated = new HSBUpdated();

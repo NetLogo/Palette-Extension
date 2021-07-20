@@ -5,9 +5,9 @@ import org.nlogo.core.LogoList;
 public class RGBUpdated {
   public LogoList updateRGB(LogoList rgb, double newVal, int ind) {
     LogoListBuilder newRGB = new LogoListBuilder();
-    for(int i = 0; i < rgb.length(); i++){
+    for(int i = 0; i < rgb.length(); i++) {
       if(i == ind) { newRGB.add(newVal); }
-      else{ newRGB.add(rgb.get(i)); }
+      else { newRGB.add(rgb.get(i)); }
     }
     return newRGB.toLogoList();
   }

@@ -10,7 +10,7 @@ import org.nlogo.core.LogoList;
 // changes the component of the color to number while leaving the other components in the same colorspace unchanged
 
 public class WithBlue implements Reporter {
-  public Syntax getSyntax(){
+  public Syntax getSyntax() {
     int left = Syntax.NumberType() | Syntax.ListType();
     int values[] = {Syntax.NumberType()};
     int ret = Syntax.ListType();
@@ -20,10 +20,10 @@ public class WithBlue implements Reporter {
     ColorManager colorManager = new ColorManager();
     LogoList rgb;
 
-    try{ // testing input
+    try { // testing input
       rgb = colorManager.extractColorFromArg(args[0]);
     }
-    catch(ExtensionException e){
+    catch(ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
 
@@ -31,10 +31,10 @@ public class WithBlue implements Reporter {
     try{
       newVal = args[1].getDoubleValue();
     }
-    catch(ExtensionException e){
+    catch(ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
-    if(newVal > 255 || newVal < 0){
+    if(newVal > 255 || newVal < 0) {
       throw new ExtensionException("Value must be in the range from 0 to 255.");
     }
     RGBUpdated rgbupdated = new RGBUpdated();

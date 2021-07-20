@@ -21,10 +21,10 @@ public class ExtractSaturation implements Reporter {
   public Object report(Argument args[], Context context) throws ExtensionException {
     ColorManager colorManager = new ColorManager();
     LogoList rgb;
-    try{
+    try {
         rgb = colorManager.extractColorFromArg(args[0]);
     }
-    catch(ExtensionException e){
+    catch(ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
     ExtractHSB extracthsb = new ExtractHSB();

@@ -17,8 +17,8 @@ public class GetAgentRed implements Reporter {
   }
 
   public Object report(Argument args[], Context context) throws ExtensionException {
-    ColorManager cm = new ColorManager();
-    LogoList rgb = cm.getAgentColor(context);
+    ColorManager colorManager = new ColorManager();
+    LogoList rgb = colorManager.getAgentColor(context);
     return rgb.get(0);
   }
 }

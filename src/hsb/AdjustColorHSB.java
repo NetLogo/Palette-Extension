@@ -19,11 +19,11 @@ public class AdjustColorHSB {
     colorManager.setAgentColor(context, rgb);
   }
 
-  public LogoList getNewColor(LogoList rgb, double modifier, int ind){ //get new color to set
+  public LogoList getNewColor(LogoList rgb, double modifier, int ind) { //get new color to set
     ExtractHSB extracthsb = new ExtractHSB();
     double val = extracthsb.extract(rgb, ind) + modifier;
     if(ind == 0) { val = modDouble(val, 360); }
-    else if(ind == 1){ val = Math.min(100, Math.max(val, 0)); }
+    else if(ind == 1) { val = Math.min(100, Math.max(val, 0)); }
     else { val = Math.min(100, Math.max(val, 5)); }
 
     HSBUpdated hsbupdated = new HSBUpdated();
@@ -31,9 +31,9 @@ public class AdjustColorHSB {
     return rgb;
   }
 
-  public double modDouble(double a, double b){
-    while(a < 0){ a += b; }
-    while(a >= b){ a -= b; }
+  public double modDouble(double a, double b) {
+    while(a < 0) { a += b; }
+    while(a >= b) { a -= b; }
     return a;
   }
 }

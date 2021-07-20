@@ -12,7 +12,7 @@ import org.nlogo.api.Color;
 
 public class ExtractTransparency implements Reporter {
 
-  public Syntax getSyntax(){
+  public Syntax getSyntax() {
     int[] values = {
       Syntax.NumberType() | Syntax.ListType() // color
     };
@@ -21,12 +21,12 @@ public class ExtractTransparency implements Reporter {
   }
 
   public Object report(Argument args[] , Context context)
-    throws ExtensionException{
+    throws ExtensionException {
 
     double alpha = 255;
     ColorManager colorManager = new ColorManager();
     LogoList the_color = colorManager.extractColorFromArg(args[0]);
-    if(the_color.length() >= 4){
+    if(the_color.length() >= 4) {
       alpha = (Double) the_color.get(3);
     }
     return (1 - alpha/255) * 100;
