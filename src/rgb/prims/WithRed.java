@@ -1,13 +1,12 @@
-import org.nlogo.core.Syntax;
-import org.nlogo.core.SyntaxJ;
-import org.nlogo.api.Reporter;
+// [color] palette:with-component [number]
+// changes the component of the color to number while leaving the other components in the same colorspace unchanged
 import org.nlogo.api.Argument;
 import org.nlogo.api.Context;
 import org.nlogo.api.ExtensionException;
+import org.nlogo.api.Reporter;
 import org.nlogo.core.LogoList;
-
-// [color] palette:with-component [number]
-// changes the component of the color to number while leaving the other components in the same colorspace unchanged
+import org.nlogo.core.Syntax;
+import org.nlogo.core.SyntaxJ;
 
 public class WithRed implements Reporter {
   public Syntax getSyntax() {
@@ -16,6 +15,7 @@ public class WithRed implements Reporter {
     int ret = Syntax.ListType();
     return SyntaxJ.reporterSyntax(left, values, ret, Syntax.NormalPrecedence());
   }
+
   public Object report(Argument args[], Context context) throws ExtensionException {
     ColorManager colorManager = new ColorManager();
     LogoList rgb;
@@ -23,18 +23,18 @@ public class WithRed implements Reporter {
     try { // testing input
       rgb = colorManager.extractColorFromArg(args[0]);
     }
-    catch(ExtensionException e) {
+    catch (ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
 
     double newVal = 0;
-    try{
+    try {
       newVal = args[1].getDoubleValue();
     }
-    catch(ExtensionException e) {
+    catch (ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
-    if(newVal > 255 || newVal< 0) {
+    if (newVal > 255 || newVal < 0) {
       throw new ExtensionException("Value must be in the range from 0 to 255.");
     }
     RGBUpdated rgbupdated = new RGBUpdated();

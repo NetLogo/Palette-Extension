@@ -1,13 +1,12 @@
-import org.nlogo.core.Syntax;
-import org.nlogo.core.SyntaxJ;
-import org.nlogo.api.Reporter;
+// [color] palette:with-component [number]
+// changes the component of the color to number while leaving the other components in the same colorspace unchanged
 import org.nlogo.api.Argument;
 import org.nlogo.api.Context;
 import org.nlogo.api.ExtensionException;
+import org.nlogo.api.Reporter;
 import org.nlogo.core.LogoList;
-
-// [color] palette:with-component [number]
-// changes the component of the color to number while leaving the other components in the same colorspace unchanged
+import org.nlogo.core.Syntax;
+import org.nlogo.core.SyntaxJ;
 
 public class WithHue implements Reporter {
   public Syntax getSyntax() {
@@ -23,7 +22,7 @@ public class WithHue implements Reporter {
     try { // testing input
       rgb = colorManager.extractColorFromArg(args[0]);
     }
-    catch(ExtensionException e) {
+    catch (ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
 
@@ -31,7 +30,7 @@ public class WithHue implements Reporter {
     try {
       newVal = args[1].getDoubleValue();
     }
-    catch(ExtensionException e) {
+    catch (ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
     HSBUpdated hsbupdated = new HSBUpdated();

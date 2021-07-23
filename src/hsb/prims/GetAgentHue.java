@@ -1,7 +1,7 @@
 import org.nlogo.api.Argument;
+import org.nlogo.api.Color;
 import org.nlogo.api.Context;
 import org.nlogo.api.Reporter;
-import org.nlogo.api.Color;
 import org.nlogo.core.LogoList;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;

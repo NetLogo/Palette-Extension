@@ -1,14 +1,13 @@
-import org.nlogo.agent.Turtle;
+import org.nlogo.agent.Agent;
 import org.nlogo.agent.Link;
 import org.nlogo.agent.Patch;
-import org.nlogo.agent.Agent;
+import org.nlogo.agent.Turtle;
+import org.nlogo.api.AgentException;
+import org.nlogo.api.Color;
+import org.nlogo.api.Context;
+import org.nlogo.api.ExtensionException;
 import org.nlogo.core.AgentKind;
 import org.nlogo.core.AgentKindJ;
-import org.nlogo.api.AgentException;
-import org.nlogo.api.ExtensionException;
-
-import org.nlogo.api.Context;
-import org.nlogo.api.Color;
 import org.nlogo.core.LogoList;
 
 public class AdjustColorHSB {
@@ -22,8 +21,8 @@ public class AdjustColorHSB {
   public LogoList getNewColor(LogoList rgb, double modifier, int ind) { //get new color to set
     ExtractHSB extracthsb = new ExtractHSB();
     double val = extracthsb.extract(rgb, ind) + modifier;
-    if(ind == 0) { val = modDouble(val, 360); }
-    else if(ind == 1) { val = Math.min(100, Math.max(val, 0)); }
+    if (ind == 0) { val = modDouble(val, 360); }
+    else if (ind == 1) { val = Math.min(100, Math.max(val, 0)); }
     else { val = Math.min(100, Math.max(val, 5)); }
 
     HSBUpdated hsbupdated = new HSBUpdated();
@@ -32,8 +31,8 @@ public class AdjustColorHSB {
   }
 
   public double modDouble(double a, double b) {
-    while(a < 0) { a += b; }
-    while(a >= b) { a -= b; }
+    while (a < 0) { a += b; }
+    while (a >= b) { a -= b; }
     return a;
   }
 }

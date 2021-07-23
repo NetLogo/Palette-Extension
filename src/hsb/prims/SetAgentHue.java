@@ -1,11 +1,11 @@
 import org.nlogo.api.Argument;
-import org.nlogo.api.Context;
-import org.nlogo.api.Command;
 import org.nlogo.api.Color;
+import org.nlogo.api.Command;
+import org.nlogo.api.Context;
+import org.nlogo.api.ExtensionException;
 import org.nlogo.core.LogoList;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
-import org.nlogo.api.ExtensionException;
 
 public class SetAgentHue implements Command {
   public Syntax getSyntax() {
@@ -21,10 +21,10 @@ public class SetAgentHue implements Command {
     try {
       newValue = args[0].getDoubleValue();
     }
-    catch(ExtensionException e) {
+    catch (ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
-    if(newValue < 0 || newValue > 360) {
+    if (newValue < 0 || newValue > 360) {
       throw new ExtensionException("Hue must be in the range from 0 to 360.");
     }
     LogoList rgb = colorManager.getAgentColor(context);

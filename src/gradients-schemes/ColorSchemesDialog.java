@@ -1,14 +1,11 @@
-
-
-
 /**
  * The ColorSchemeDialog is a simply widget that contains a color SchemesPanel.
- * The values of the selected color scheme are accessed throught the contained 
+ * The values of the selected color scheme are accessed throught the contained
  * widget:
  * colorSchemesDialog.colorSchemesWidget.getcolorSchemeRGBArray();
  * or
  * colorSchemesDialog.colorSchemesWidget.getcolorSchemeColorArray();
- * 
+ *
  * The Ok Button leaves the selected scheme while the Cancel Button restores
  * the initial values of the widget
  */
@@ -43,24 +40,24 @@ import org.nlogo.api.ExtensionException;
 public class ColorSchemesDialog extends JDialog implements ActionListener,
 ClipboardOwner
 {
-	
+
 	private static final long serialVersionUID = 1L;
 	ColorSchemesPanel colorSchemesPanel;
 	JButton copyButton;
 	JButton closeButton;
 	JLabel statusLabel;
-	
+
 	String InitialcolorLegendName;
 	String InitialcolorSchemeType;
 	int InitialcolorSchemeSize;
-	
+
 	public ColorSchemesDialog (Frame frame, boolean modalFlag )
 	{
 		super (frame, "Color Scheme Swatches", modalFlag);
 		this.setModal(true);
 		statusLabel = new JLabel("TEST                      ");
 
-		
+
 	try
 	{
 		colorSchemesPanel= new ColorSchemesPanel(statusLabel);
@@ -68,31 +65,31 @@ ClipboardOwner
 	catch( ExtensionException ex )
 	{
 	}
-		
+
 		InitialcolorLegendName = colorSchemesPanel.colorLegendName;
 		InitialcolorSchemeType = colorSchemesPanel.colorSchemeType;
 		InitialcolorSchemeSize = colorSchemesPanel.colorSchemeSize;
-		
+
 		colorSchemesPanel.setVisible(true);
 
         copyButton = new JButton("Copy");
-        copyButton.addActionListener(this);	
-		
+        copyButton.addActionListener(this);
+
         closeButton = new JButton("Close");
         closeButton.addActionListener(this);
-        
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel,
                                            BoxLayout.LINE_AXIS));
-        
+
         buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(copyButton);
-        
+
 		//Add the Status Label
 		statusLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 		statusLabel.setHorizontalAlignment(JLabel.RIGHT);
 		buttonPanel.add(statusLabel, BorderLayout.CENTER);
-        
+
         buttonPanel.add(Box.createRigidArea(new Dimension(50,5)));
         buttonPanel.add(closeButton);
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(0,0,5,5));
@@ -146,13 +143,13 @@ ClipboardOwner
     	}
         setVisible(false);
         dispose();
-        
+
     }
 
-	// The following callback are not used for anything 
-	// but the Interfaces demands them	
+	// The following callback are not used for anything
+	// but the Interfaces demands them
 	public void lostOwnership( Clipboard arg0 , Transferable arg1 )
-	{	
+	{
 	}
-    
+
 }

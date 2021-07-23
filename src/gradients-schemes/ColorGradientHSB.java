@@ -1,7 +1,8 @@
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
+
 import org.nlogo.core.LogoList;
 
 public class ColorGradientHSB {
@@ -12,14 +13,14 @@ public class ColorGradientHSB {
 	public void genArray(double[] startColor, double[] endColor, int width)
 	{
 		double[] inc = new double[3]; width--;
-		if(endColor[0] > startColor[0]) {
-			if(startColor[0] + 360 - endColor[0] < endColor[0] - startColor[0]) {
+		if (endColor[0] > startColor[0]) {
+			if (startColor[0] + 360 - endColor[0] < endColor[0] - startColor[0]) {
 				inc[0] = (endColor[0] - (startColor[0] + 360.0)) / width;
 			}
 			else {inc[0] = (endColor[0] - startColor[0]) / width; }
 		}
 		else {
-			if(endColor[0] + 360.0 - startColor[0] < startColor[0] - endColor[0]) {
+			if (endColor[0] + 360.0 - startColor[0] < startColor[0] - endColor[0]) {
 				inc[0] = (endColor[0] + 360.0 - startColor[0]) / width;
 			}
 			else {inc[0] = (endColor[0] - startColor[0]) / width; }
@@ -30,10 +31,10 @@ public class ColorGradientHSB {
 
 		GradientHSBArray = new double[width][3];
 		GradientHSBArray[0] = startColor;
-		for(int i = 1; i < width; i++) {
-			for(int j = 0; j < 3; j++) {
+		for (int i = 1; i < width; i++) {
+			for (int j = 0; j < 3; j++) {
 				GradientHSBArray[i][j] = GradientHSBArray[i-1][j] + inc[j];
-				if(j > 0) {
+				if (j > 0) {
 					GradientHSBArray[i][j] = Math.min(100, Math.max(0, GradientHSBArray[i][j]));
 				}
 				else {

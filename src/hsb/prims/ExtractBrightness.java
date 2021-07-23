@@ -1,9 +1,9 @@
-import org.nlogo.api.Argument;
-import org.nlogo.api.Context;
-import org.nlogo.api.Reporter;
-import org.nlogo.api.ExtensionException;
 import org.nlogo.api.AgentException;
+import org.nlogo.api.Argument;
 import org.nlogo.api.Color;
+import org.nlogo.api.Context;
+import org.nlogo.api.ExtensionException;
+import org.nlogo.api.Reporter;
 import org.nlogo.core.LogoList;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
@@ -24,7 +24,7 @@ public class ExtractBrightness implements Reporter {
     try {
         rgb = colorManager.extractColorFromArg(args[0]);
     }
-    catch(ExtensionException e) {
+    catch (ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
     ExtractHSB extracthsb = new ExtractHSB();

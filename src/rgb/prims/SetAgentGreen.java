@@ -16,15 +16,14 @@ public class SetAgentGreen implements Command {
   public void perform(Argument args[], Context context) throws ExtensionException {
     ColorManager colorManager = new ColorManager();
     RGBUpdated rgbupdated = new RGBUpdated();
-
     double newVal = 255;
     try {
       newVal = args[0].getDoubleValue();
     }
-    catch(ExtensionException e) {
+    catch (ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
-    if(newVal < 0 || newVal > 255) {
+    if (newVal < 0 || newVal > 255) {
       throw new ExtensionException("Value must be in the range from 0 to 255.");
     }
     colorManager.setAgentColor(context, rgbupdated.updateRGB(colorManager.getAgentColor(context), newVal, 1));

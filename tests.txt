@@ -14,6 +14,10 @@ Gradient-Scale4
   extensions [palette]
   palette:scale-gradient [[255 44 0] [0 255 100] [10 0 150]] 0 255 0 => [9 0 149]
 
+Gradient-Scale5
+  extensions [palette]
+  palette:scale-gradient [red blue] 50 0 100 => [133 71 105]
+
 Scale-Gradient-HSB
   extensions [palette]
   palette:scale-gradient-hsb [ [3.103 80.94 84.314] [3.103 80.94 84.314] ] 0 0 0 => [215 50 41]
