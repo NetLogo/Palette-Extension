@@ -8,7 +8,6 @@ import org.nlogo.core.LogoList;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
 
-
 public class ExtractBrightness implements Reporter {
   public Syntax getSyntax() {
     int[] values = {

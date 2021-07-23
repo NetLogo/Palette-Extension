@@ -147,7 +147,7 @@ public class ScaleGradientHSB implements Reporter {
 			gradientList.add( Double.valueOf( gradientArray[ index ][ 1 ] ) ) ;
 			gradientList.add( Double.valueOf( gradientArray[ index ][ 2 ] ) ) ;
 		}
-		catch( ArrayIndexOutOfBoundsException e ) {
+		catch ( ArrayIndexOutOfBoundsException e ) {
 			throw new ExtensionException(
 					"Please e-mail send this error to bugs@ccl.northwestern.edu" +
 					e.getMessage() ) ;

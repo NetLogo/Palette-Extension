@@ -1,5 +1,3 @@
-// [color] palette:with-component [number]
-// changes the component of the color to number while leaving the other components in the same colorspace unchanged
 import org.nlogo.api.Argument;
 import org.nlogo.api.Context;
 import org.nlogo.api.ExtensionException;
@@ -9,6 +7,8 @@ import org.nlogo.core.LogoList;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
 
+// [color] palette:with-component [number]
+// changes the component of the color to number while leaving the other components in the same colorspace unchanged
 public class WithAlpha implements Reporter {
   public Syntax getSyntax() {
     int left = Syntax.NumberType() | Syntax.ListType();

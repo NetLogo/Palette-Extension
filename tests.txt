@@ -21,6 +21,9 @@ Gradient-Scale5
 Scale-Gradient-HSB
   extensions [palette]
   palette:scale-gradient-hsb [ [3.103 80.94 84.314] [3.103 80.94 84.314] ] 0 0 0 => [215 50 41]
+  palette:scale-gradient-hsb [[100 100 100] [0 0 0]] 0 50 75 => [85 255 0]
+  palette:scale-gradient-hsb [[100 100 100] [0 0 0]] 75 0 100 => [64 55 48]
+  palette:scale-gradient-hsb [[100 100 100] [0 0 0]] 25 100 0 => [64 55 48]
 
 Scale-Scheme1
   extensions [palette]
@@ -102,6 +105,12 @@ Set-Alpha-Errors
 Set-Alpha-Errors_2D
   extensions [palette]
   P> palette:set-alpha 100 => ERROR Extension exception: Alpha for 2D patches cannot be changed.
+
+Set-Alpha_3D
+  extensions [palette]
+  P> set pcolor 0 0 0 red
+  P> palette:set-alpha 100
+  [pcolor] of patch 0 0 0 => [215 50 41 100]
 
 With-Alpha
   extensions [palette]
