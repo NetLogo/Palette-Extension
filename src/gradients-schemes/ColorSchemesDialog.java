@@ -38,118 +38,101 @@ import org.nlogo.api.ExtensionException;
 //TODO: Handle better the InitialcolorLegendName, InitialcolorLegendName, InitialcolorSchemeSize
 
 public class ColorSchemesDialog extends JDialog implements ActionListener,
-ClipboardOwner
-{
+ClipboardOwner {
 
-	private static final long serialVersionUID = 1L;
-	ColorSchemesPanel colorSchemesPanel;
-	JButton copyButton;
-	JButton closeButton;
-	JLabel statusLabel;
+  private static final long serialVersionUID = 1L;
+  ColorSchemesPanel colorSchemesPanel;
+  JButton copyButton;
+  JButton closeButton;
+  JLabel statusLabel;
 
-	String InitialcolorLegendName;
-	String InitialcolorSchemeType;
-	int InitialcolorSchemeSize;
+  String InitialcolorLegendName;
+  String InitialcolorSchemeType;
+  int InitialcolorSchemeSize;
 
-	public ColorSchemesDialog (Frame frame, boolean modalFlag )
-	{
-		super (frame, "Color Scheme Swatches", modalFlag);
-		this.setModal(true);
-		statusLabel = new JLabel("TEST                      ");
+  public ColorSchemesDialog (Frame frame, boolean modalFlag) {
+    super (frame, "Color Scheme Swatches", modalFlag);
+    this.setModal(true);
+    statusLabel = new JLabel("TEST                      ");
 
+    try {
+      colorSchemesPanel= new ColorSchemesPanel(statusLabel);
+    }
+    catch(ExtensionException ex) { }
 
-	try
-	{
-		colorSchemesPanel= new ColorSchemesPanel(statusLabel);
-	}
-	catch( ExtensionException ex )
-	{
-	}
+    InitialcolorLegendName = colorSchemesPanel.colorLegendName;
+    InitialcolorSchemeType = colorSchemesPanel.colorSchemeType;
+    InitialcolorSchemeSize = colorSchemesPanel.colorSchemeSize;
 
-		InitialcolorLegendName = colorSchemesPanel.colorLegendName;
-		InitialcolorSchemeType = colorSchemesPanel.colorSchemeType;
-		InitialcolorSchemeSize = colorSchemesPanel.colorSchemeSize;
+    colorSchemesPanel.setVisible(true);
 
-		colorSchemesPanel.setVisible(true);
+    copyButton = new JButton("Copy");
+    copyButton.addActionListener(this);
 
-        copyButton = new JButton("Copy");
-        copyButton.addActionListener(this);
+    closeButton = new JButton("Close");
+    closeButton.addActionListener(this);
 
-        closeButton = new JButton("Close");
-        closeButton.addActionListener(this);
+    JPanel buttonPanel = new JPanel();
+    buttonPanel.setLayout(new BoxLayout(buttonPanel,
+                                        BoxLayout.LINE_AXIS));
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel,
-                                           BoxLayout.LINE_AXIS));
+    buttonPanel.add(Box.createHorizontalGlue());
+    buttonPanel.add(copyButton);
 
-        buttonPanel.add(Box.createHorizontalGlue());
-        buttonPanel.add(copyButton);
+    //Add the Status Label
+    statusLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+    statusLabel.setHorizontalAlignment(JLabel.RIGHT);
+    buttonPanel.add(statusLabel, BorderLayout.CENTER);
 
-		//Add the Status Label
-		statusLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
-		statusLabel.setHorizontalAlignment(JLabel.RIGHT);
-		buttonPanel.add(statusLabel, BorderLayout.CENTER);
-
-        buttonPanel.add(Box.createRigidArea(new Dimension(50,5)));
-        buttonPanel.add(closeButton);
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0,0,5,5));
+    buttonPanel.add(Box.createRigidArea(new Dimension(50,5)));
+    buttonPanel.add(closeButton);
+    buttonPanel.setBorder(BorderFactory.createEmptyBorder(0,0,5,5));
 
 
-        JPanel contentPane = new JPanel(new BorderLayout());
-        contentPane.add(buttonPanel, BorderLayout.PAGE_END);
-        contentPane.add(colorSchemesPanel, BorderLayout.CENTER);
-        contentPane.setOpaque(true);
-        setContentPane(contentPane);
+    JPanel contentPane = new JPanel(new BorderLayout());
+    contentPane.add(buttonPanel, BorderLayout.PAGE_END);
+    contentPane.add(colorSchemesPanel, BorderLayout.CENTER);
+    contentPane.setOpaque(true);
+    setContentPane(contentPane);
 
-        //Pack it.
-        pack();
-	}
+    //Pack it.
+    pack();
+  }
 
-	public void  showDialog()
-	{
-		setVisible(true);
-	}
+  public void showDialog() {
+    setVisible(true);
+  }
 
     /** This method handles events for the text field. */
-    public void actionPerformed(ActionEvent e) {
-    	if (e.getSource() == copyButton )
-    	{
-		SecurityManager sm = System.getSecurityManager();
-		if (sm != null) {
-			try {
-        sm.checkPermission(new AWTPermission("accessClipboard"));
-      } catch (Exception ex) {
-        ex.printStackTrace();
+  public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == copyButton) {
+      SecurityManager sm = System.getSecurityManager();
+      if (sm != null) {
+        try {
+          sm.checkPermission(new AWTPermission("accessClipboard"));
+        } catch (Exception ex) {
+          ex.printStackTrace();
+        }
       }
-		}
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		StringSelection st = new StringSelection(statusLabel.getText());
-		Clipboard cp = tk.getSystemClipboard();
-		cp.setContents(st, this);
-    	}
-    	else if  (e.getSource() == closeButton )
-    	{
-    		// restore the selected values to the initial values
-			try
-			{
-	        	colorSchemesPanel.setLegend(InitialcolorSchemeType,
-											 InitialcolorLegendName,
-											 InitialcolorSchemeSize);
-			}
-			catch( ExtensionException ex )
-			{
-
-			}
-    	}
-        setVisible(false);
-        dispose();
-
+      Toolkit tk = Toolkit.getDefaultToolkit();
+      StringSelection st = new StringSelection(statusLabel.getText());
+      Clipboard cp = tk.getSystemClipboard();
+      cp.setContents(st, this);
     }
+    else if (e.getSource() == closeButton) {
+        // restore the selected values to the initial values
+      try {
+            colorSchemesPanel.setLegend(InitialcolorSchemeType,
+                       InitialcolorLegendName,
+                       InitialcolorSchemeSize);
+      }
+      catch(ExtensionException ex) { }
+    }
+    setVisible(false);
+    dispose();
+  }
 
-	// The following callback are not used for anything
-	// but the Interfaces demands them
-	public void lostOwnership( Clipboard arg0 , Transferable arg1 )
-	{
-	}
-
+  // The following callback are not used for anything
+  // but the Interfaces demands them
+  public void lostOwnership(Clipboard arg0,Transferable arg1) { }
 }

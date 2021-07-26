@@ -3,14 +3,13 @@ import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-public class ColorGradient extends BufferedImage{
+public class ColorGradient extends BufferedImage {
 
   int[][] GradientRGBArray;
 
   // create a rectangle of 1 by 256 pixels with all the gradients.
-  public ColorGradient (Color startColor, Color endColor, int width)
-  {
-    super(width, 1, BufferedImage.TYPE_INT_RGB);
+  public ColorGradient (Color startColor, Color endColor, int width) {
+    super (width, 1, BufferedImage.TYPE_INT_RGB);
     GradientPaint gradientPaint = new GradientPaint(0, 0, startColor,
                             width, 0, endColor ,
                             false);
@@ -20,8 +19,7 @@ public class ColorGradient extends BufferedImage{
   }
 
   // returns an array with 3 arrays with the separate rgb channels.
-  public int [] getPixelRGBArray(int x , int y)
-  {
+  public int [] getPixelRGBArray(int x , int y) {
     int rgb = getRGB(x,y);
     Color c = new Color(rgb);
     int[] pixelRGBArray = {c.getRed(), c.getGreen(), c.getBlue()};
@@ -29,8 +27,7 @@ public class ColorGradient extends BufferedImage{
   }
 
   // returns an array with arrays of rgb colors in the gradient
-  public int [][] getGradientRGBArray()
-  {
+  public int [][] getGradientRGBArray() {
     // Get all the pixels
     final int w = getWidth();
     final int h = getHeight();
@@ -39,8 +36,7 @@ public class ColorGradient extends BufferedImage{
 
     GradientRGBArray = new int[gradientRGB.length][3];
     Color c;
-    for (int i=0; i < gradientRGB.length; i++)
-    {
+    for (int i=0; i < gradientRGB.length; i++) {
       c = new Color(gradientRGB[i]);
       GradientRGBArray[i][0] = c.getRed();
       GradientRGBArray[i][1] = c.getGreen();
