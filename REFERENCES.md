@@ -8,7 +8,6 @@ HEALEY, C G (2006) Perception in Visualization, (comprehensive review updated re
 
 HEALEY, C G, BOOTH K S, and ENNS, J T (1995). Visualizing Real-Time Multivariate Data Using Preattentive Processing ACM Transactions on Modeling and Computer Simulation 5, 3, 190-221.
 
-TUFTE, E (1983) The Visual Display of Quantitative Information , Graphics Press.
+TUFTE, E (1983) The Visual Display of Quantitative Information, Graphics Press.
 
 WARE, C (2004) Information Visualization, 2nd Ed., Morgan Kaufmann.
-Feedback
