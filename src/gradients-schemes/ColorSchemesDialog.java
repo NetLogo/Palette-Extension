@@ -50,9 +50,9 @@ ClipboardOwner {
   String InitialcolorSchemeType;
   int InitialcolorSchemeSize;
 
-  public ColorSchemesDialog (Frame frame, boolean modalFlag) {
-    super (frame, "Color Scheme Swatches", modalFlag);
-    this.setModal(true);
+  public ColorSchemesDialog (Frame frame) {
+    super (frame, "Color Scheme Swatches");
+    setAlwaysOnTop(true);
     statusLabel = new JLabel("TEST                      ");
 
     try {
@@ -127,9 +127,9 @@ ClipboardOwner {
                        InitialcolorSchemeSize);
       }
       catch(ExtensionException ex) { }
+      setVisible(false);
+      dispose();
     }
-    setVisible(false);
-    dispose();
   }
 
   // The following callback are not used for anything
