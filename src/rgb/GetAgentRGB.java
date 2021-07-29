@@ -8,24 +8,22 @@ import org.nlogo.core.LogoList;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
 
-public class ExtractGreen implements Reporter {
+public class GetAgentRGB implements Reporter {
+
+  private int index;
+
+  public GetAgentRGB(int ind) {
+    index = ind;
+  }
+
   public Syntax getSyntax() {
-    int[] values = {
-      Syntax.NumberType() | Syntax.ListType()
-    };
+    int[] values = {};
     int ret = Syntax.NumberType();
-    return SyntaxJ.reporterSyntax(values, ret, 1);
+    return SyntaxJ.reporterSyntax(values, ret, "-TPL");
   }
 
   public Object report(Argument args[], Context context) throws ExtensionException {
-    ColorManager colorManager = new ColorManager();
-    LogoList rgb;
-    try {
-      rgb = colorManager.extractColorFromArg(args[0]);
-    }
-    catch(ExtensionException e) {
-      throw new ExtensionException(e.getMessage());
-    }
-    return rgb.get(1);
+    LogoList rgb = ColorManager.getAgentColor(context);
+    return rgb.get(index);
   }
 }

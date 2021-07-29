@@ -3,7 +3,7 @@ import org.nlogo.api.LogoListBuilder;
 import org.nlogo.core.LogoList;
 
 public class HSBUpdated {
-  public LogoList updateHSB(LogoList rgb, double newVal, int ind) {
+  public static LogoList updateHSB(LogoList rgb, double newVal, int ind) {
     double alpha = 255; //keep alpha and convert to HSB
     if (rgb.length() > 3) {
       alpha = (double) rgb.get(3);
@@ -26,8 +26,8 @@ public class HSBUpdated {
     if (alpha != 255) { finalRGBA.add(alpha); }
     return finalRGBA.toLogoList();
   }
-  
-  public LogoList HSBtoRGB(LogoList hsb) {
+
+  public static LogoList HSBtoRGB(LogoList hsb) {
     Double h = new Double((double) hsb.get(0)); Double s = new Double((double) hsb.get(1)); Double b = new Double((double) hsb.get(2)); //prep for float conversion
     int newRGBint = java.awt.Color.HSBtoRGB(h.floatValue() / 360.0f, s.floatValue() / 100.0f, b.floatValue() / 100.0f); //get new rgb
 
@@ -41,7 +41,7 @@ public class HSBUpdated {
     return rgb.toLogoList();
   }
 
-  public double modDouble(double a, double b) {
+  public static double modDouble(double a, double b) {
     while (a < 0) { a += b; }
     while (a >= b) { a -= b; }
     return a;

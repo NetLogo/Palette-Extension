@@ -18,36 +18,36 @@ public class PaletteExtension extends DefaultClassManager {
         primitiveManager.addPrimitive ("set-transparency", new SetAgentTransparency());
         primitiveManager.addPrimitive ("with-transparency", new WithTransparency());
         //HSB
-        primitiveManager.addPrimitive ("hue", new GetAgentHue());
-        primitiveManager.addPrimitive ("saturation", new GetAgentSaturation());
-        primitiveManager.addPrimitive ("brightness", new GetAgentBrightness());
+        primitiveManager.addPrimitive ("hue", new GetAgentHSB(0));
+        primitiveManager.addPrimitive ("saturation", new GetAgentHSB(1));
+        primitiveManager.addPrimitive ("brightness", new GetAgentHSB(2));
 
-        primitiveManager.addPrimitive ("set-hue", new SetAgentHue());
-        primitiveManager.addPrimitive ("set-saturation", new SetAgentSaturation());
-        primitiveManager.addPrimitive ("set-brightness", new SetAgentBrightness());
+        primitiveManager.addPrimitive ("set-hue", new SetAgentHSB(0));
+        primitiveManager.addPrimitive ("set-saturation", new SetAgentHSB(1));
+        primitiveManager.addPrimitive ("set-brightness", new SetAgentHSB(2));
 
-        primitiveManager.addPrimitive ("hue-of", new ExtractHue());
-        primitiveManager.addPrimitive ("saturation-of", new ExtractSaturation());
-        primitiveManager.addPrimitive ("brightness-of", new ExtractBrightness());
+        primitiveManager.addPrimitive ("hue-of", new ExtractHSB(0));
+        primitiveManager.addPrimitive ("saturation-of", new ExtractHSB(1));
+        primitiveManager.addPrimitive ("brightness-of", new ExtractHSB(2));
 
-        primitiveManager.addPrimitive ("with-hue", new WithHue());
-        primitiveManager.addPrimitive ("with-saturation", new WithSaturation());
-        primitiveManager.addPrimitive ("with-brightness", new WithBrightness());
+        primitiveManager.addPrimitive ("with-hue", new WithHSB(0));
+        primitiveManager.addPrimitive ("with-saturation", new WithHSB(1));
+        primitiveManager.addPrimitive ("with-brightness", new WithHSB(2));
         //RGB
-        primitiveManager.addPrimitive ("R", new GetAgentRed());
-        primitiveManager.addPrimitive ("G", new GetAgentGreen());
-        primitiveManager.addPrimitive ("B", new GetAgentBlue());
+        primitiveManager.addPrimitive ("R", new GetAgentRGB(0));
+        primitiveManager.addPrimitive ("G", new GetAgentRGB(1));
+        primitiveManager.addPrimitive ("B", new GetAgentRGB(2));
 
-        primitiveManager.addPrimitive ("set-R", new SetAgentRed());
-        primitiveManager.addPrimitive ("set-G", new SetAgentGreen());
-        primitiveManager.addPrimitive ("set-B", new SetAgentBlue());
+        primitiveManager.addPrimitive ("set-R", new SetAgentRGB(0));
+        primitiveManager.addPrimitive ("set-G", new SetAgentRGB(1));
+        primitiveManager.addPrimitive ("set-B", new SetAgentRGB(2));
 
-        primitiveManager.addPrimitive ("R-of", new ExtractRed());
-        primitiveManager.addPrimitive ("G-of", new ExtractGreen());
-        primitiveManager.addPrimitive ("B-of", new ExtractBlue());
+        primitiveManager.addPrimitive ("R-of", new ExtractRGB(0));
+        primitiveManager.addPrimitive ("G-of", new ExtractRGB(1));
+        primitiveManager.addPrimitive ("B-of", new ExtractRGB(2));
 
-        primitiveManager.addPrimitive ("with-R", new WithRed());
-        primitiveManager.addPrimitive ("with-G", new WithGreen());
-        primitiveManager.addPrimitive ("with-B", new WithBlue());
+        primitiveManager.addPrimitive ("with-R", new WithRGB(0));
+        primitiveManager.addPrimitive ("with-G", new WithRGB(1));
+        primitiveManager.addPrimitive ("with-B", new WithRGB(2));
     }
 }

@@ -8,7 +8,14 @@ import org.nlogo.core.SyntaxJ;
 
 // [color] palette:with-component [number]
 // changes the component of the color to number while leaving the other components in the same colorspace unchanged
-public class WithSaturation implements Reporter {
+public class WithRGB implements Reporter {
+
+  private int index;
+
+  public WithRGB(int ind) {
+    index = ind;
+  }
+
   public Syntax getSyntax() {
     int left = Syntax.NumberType() | Syntax.ListType();
     int values[] = {Syntax.NumberType()};
@@ -17,11 +24,10 @@ public class WithSaturation implements Reporter {
   }
 
   public Object report(Argument args[], Context context) throws ExtensionException {
-    ColorManager colorManager = new ColorManager();
     LogoList rgb;
 
     try { // testing input
-      rgb = colorManager.extractColorFromArg(args[0]);
+      rgb = ColorManager.extractColorFromArg(args[0]);
     }
     catch (ExtensionException e) {
       throw new ExtensionException(e.getMessage());
@@ -34,7 +40,9 @@ public class WithSaturation implements Reporter {
     catch (ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
-    HSBUpdated hsbupdated = new HSBUpdated();
-    return hsbupdated.updateHSB(rgb, newVal, 1);
+    if (newVal > 255 || newVal < 0) {
+      throw new ExtensionException("Value must be in the range from 0 to 255.");
+    }
+    return RGBUpdated.updateRGB(rgb, newVal, index);
   }
 }

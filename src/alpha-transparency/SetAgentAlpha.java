@@ -37,16 +37,15 @@ public class SetAgentAlpha implements Command {
     setColor(context, alpha);
   }
 
-  public void setColor(Context context, double alpha) throws ExtensionException {
-    ColorManager colorManager = new ColorManager();
-    LogoList rgb = colorManager.getAgentColor(context);
+  public static void setColor(Context context, double alpha) throws ExtensionException {
+    LogoList rgb = ColorManager.getAgentColor(context);
     LogoListBuilder newColor = new LogoListBuilder();
     for (int i = 0; i < 3; i++) {
       newColor.add(rgb.get(i));
     }
     newColor.add(alpha);
     try {
-      colorManager.setAgentColor(context, newColor.toLogoList());
+      ColorManager.setAgentColor(context, newColor.toLogoList());
     }
     catch(ExtensionException e) {
       throw new ExtensionException(e.getMessage());

@@ -12,7 +12,7 @@ import org.nlogo.core.AgentKindJ;
 import org.nlogo.core.LogoList;
 
 public class ColorManager {
-  public LogoList getAgentColor(Context context) {
+  public static LogoList getAgentColor(Context context) {
     LogoList rgb = Color.getRGBListByARGB(1); // initialized with random value to avoid compiler error
     if (context.getAgent().kind() ==  AgentKindJ.Link()) { //Link
       Link link = (Link) context.getAgent();
@@ -43,8 +43,8 @@ public class ColorManager {
     }
     return rgb;
   }
-  
-  public void setAgentColor(Context context, LogoList rgb) throws ExtensionException {
+
+  public static void setAgentColor(Context context, LogoList rgb) throws ExtensionException {
     if (context.getAgent().kind() ==  AgentKindJ.Link()) { //Link
       Link link = (Link) context.getAgent();
       try { link.color(rgb); }
@@ -68,7 +68,7 @@ public class ColorManager {
     }
   }
 
-  public LogoList extractColorFromArg(Argument arg) throws ExtensionException {
+  public static LogoList extractColorFromArg(Argument arg) throws ExtensionException {
     LogoList rgb = Color.getRGBListByARGB(1); // initialized with random value to avoid compiler error
     Object val = arg.get();
     if (val instanceof Double) {

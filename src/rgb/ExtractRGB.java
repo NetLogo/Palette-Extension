@@ -8,7 +8,14 @@ import org.nlogo.core.LogoList;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
 
-public class ExtractRed implements Reporter {
+public class ExtractRGB implements Reporter {
+
+  private int index;
+
+  public ExtractRGB(int ind) {
+    index = ind;
+  }
+
   public Syntax getSyntax() {
     int[] values = {
       Syntax.NumberType() | Syntax.ListType()
@@ -18,14 +25,13 @@ public class ExtractRed implements Reporter {
   }
 
   public Object report(Argument args[], Context context) throws ExtensionException {
-    ColorManager colorManager = new ColorManager();
     LogoList rgb;
     try {
-      rgb = colorManager.extractColorFromArg(args[0]);
+      rgb = ColorManager.extractColorFromArg(args[0]);
     }
-    catch(ExtensionException e) {
+    catch (ExtensionException e) {
       throw new ExtensionException(e.getMessage());
     }
-    return rgb.get(0);
+    return rgb.get(index);
   }
 }

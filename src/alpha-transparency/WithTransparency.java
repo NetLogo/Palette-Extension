@@ -17,8 +17,7 @@ public class WithTransparency implements Reporter {
     return SyntaxJ.reporterSyntax(left, values, ret, Syntax.NormalPrecedence());
   }
   public Object report(Argument args[], Context context) throws ExtensionException {
-    ColorManager colorManager = new ColorManager();
-    LogoList the_rgbcolor = colorManager.extractColorFromArg(args[0]);
+    LogoList rgbcolor = ColorManager.extractColorFromArg(args[0]);
     double alpha = 255;
     try {
       alpha = args[1].getDoubleValue();
@@ -32,7 +31,7 @@ public class WithTransparency implements Reporter {
     }
     LogoListBuilder ans = new LogoListBuilder();
     for (int i = 0; i < 3; i++) {
-      ans.add(the_rgbcolor.get(i));
+      ans.add(rgbcolor.get(i));
     }
     if (alpha != 255) {
       ans.add(alpha);

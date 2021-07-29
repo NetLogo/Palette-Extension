@@ -7,16 +7,22 @@ import org.nlogo.core.LogoList;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
 
-public class SetAgentSaturation implements Command {
+public class SetAgentHSB implements Command {
+
+  private int index;
+  private String type[] = {"Hue", "Saturation", "Brightness"};
+  private int value[] = {360, 100, 100};
+
+  public SetAgentHSB(int ind) {
+    index = ind;
+  }
+
   public Syntax getSyntax() {
     int values[] = {Syntax.NumberType()};
     return SyntaxJ.commandSyntax(values, "-TPL");
   }
 
   public void perform(Argument args[], Context context) throws ExtensionException {
-    ColorManager colorManager = new ColorManager();
-    HSBUpdated hsbupdated = new HSBUpdated();
-
     double newValue = 0;
     try {
       newValue = args[0].getDoubleValue();
@@ -25,10 +31,10 @@ public class SetAgentSaturation implements Command {
       throw new ExtensionException(e.getMessage());
     }
     if (newValue < 0 || newValue > 100) {
-      throw new ExtensionException("Saturation must be in the range from 0 to 100.");
+      throw new ExtensionException(type[index] + " must be in the range from 0 to " + value[index] + ".");
     }
-    LogoList rgb = colorManager.getAgentColor(context);
-    rgb = hsbupdated.updateHSB(rgb, newValue, 1);
-    colorManager.setAgentColor(context, rgb);
+    LogoList rgb = ColorManager.getAgentColor(context);
+    rgb = HSBUpdated.updateHSB(rgb, newValue, index);
+    ColorManager.setAgentColor(context, rgb);
   }
 }

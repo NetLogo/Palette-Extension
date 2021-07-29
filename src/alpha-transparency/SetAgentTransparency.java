@@ -20,8 +20,6 @@ public class SetAgentTransparency implements Command {
     return SyntaxJ.commandSyntax(values, "-TPL");
   }
   public void perform(Argument args[], Context context) throws ExtensionException {
-    ColorManager colorManager = new ColorManager();
-    LogoList the_rgbcolor = colorManager.getAgentColor(context);
     double alpha = 255;
     try {
       alpha = args[0].getDoubleValue();
@@ -36,7 +34,6 @@ public class SetAgentTransparency implements Command {
       throw new ExtensionException("Transparency for 2D patches cannot be changed.");
     }
     alpha = 255 * (1 - alpha / 100);
-    SetAgentAlpha setAgentAlpha = new SetAgentAlpha();
-    setAgentAlpha.setColor(context, alpha);
+    SetAgentAlpha.setColor(context, alpha);
   }
 }
