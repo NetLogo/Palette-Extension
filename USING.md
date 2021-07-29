@@ -89,7 +89,7 @@ ColorBrewer has three kinds of color schemes: Sequential, Divergent and Qualitat
 * The main goal is to avoid having a large area covered with agents with a bright color and or having small areas having a muted pastel color.
 * If you are coloring both turtles and patches, make sure they have different ranges of hue, saturation and value. For example, use different hues of pastel for patches and accent for turtles.
 
-You can learn more about the use of these color collections in the original ColorBrewer paper (Harrower, Brewer 2003), which focuses on their application to maps
+You can learn more about the use of these color collections in the original ColorBrewer paper (Harrower, Brewer 2003), which focuses on their application to maps. See (Kornhauser, Wilensky, and Rand 1999) for design guidelines for visualization of Agent Based Models.
 
 ### Should I use a continuous color gradient or just a discrete color set?
 
