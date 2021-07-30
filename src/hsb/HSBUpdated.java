@@ -35,7 +35,7 @@ public class HSBUpdated {
     LogoListBuilder rgb = new LogoListBuilder();
     int shift = 16;
     for (int i  = 0; i < 3; i++) {
-    rgb.add((double) ((newRGBint >> shift) & 0xff));
+      rgb.add((double) ((newRGBint >> shift) & 0xff));
       shift -= 8;
     }
     return rgb.toLogoList();

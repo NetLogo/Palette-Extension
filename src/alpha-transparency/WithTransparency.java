@@ -19,12 +19,7 @@ public class WithTransparency implements Reporter {
   public Object report(Argument args[], Context context) throws ExtensionException {
     LogoList rgbcolor = ColorManager.extractColorFromArg(args[0]);
     double alpha = 255;
-    try {
-      alpha = args[1].getDoubleValue();
-    }
-    catch (ExtensionException e) {
-      throw new ExtensionException(e.getMessage());
-    }
+    alpha = args[1].getDoubleValue();
     alpha = 255 * (1 - alpha / 100);
     if (alpha < 0 || alpha > 255) {
       throw new ExtensionException("Transparency must be in the range from 0 to 100.");

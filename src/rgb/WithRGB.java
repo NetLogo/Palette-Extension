@@ -24,22 +24,8 @@ public class WithRGB implements Reporter {
   }
 
   public Object report(Argument args[], Context context) throws ExtensionException {
-    LogoList rgb;
-
-    try { // testing input
-      rgb = ColorManager.extractColorFromArg(args[0]);
-    }
-    catch (ExtensionException e) {
-      throw new ExtensionException(e.getMessage());
-    }
-
-    double newVal = 0;
-    try {
-      newVal = args[1].getDoubleValue();
-    }
-    catch (ExtensionException e) {
-      throw new ExtensionException(e.getMessage());
-    }
+    LogoList rgb = ColorManager.extractColorFromArg(args[0]);
+    double newVal = args[1].getDoubleValue();
     if (newVal > 255 || newVal < 0) {
       throw new ExtensionException("Value must be in the range from 0 to 255.");
     }

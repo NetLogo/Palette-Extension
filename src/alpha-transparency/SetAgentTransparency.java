@@ -20,13 +20,7 @@ public class SetAgentTransparency implements Command {
     return SyntaxJ.commandSyntax(values, "-TPL");
   }
   public void perform(Argument args[], Context context) throws ExtensionException {
-    double alpha = 255;
-    try {
-      alpha = args[0].getDoubleValue();
-    }
-    catch (ExtensionException e) {
-      throw new ExtensionException(e.getMessage());
-    }
+    double alpha = args[0].getDoubleValue();
     if (alpha < 0 || alpha > 100) {
       throw new ExtensionException("Transparency must be in the range from 0 to 100.");
     }

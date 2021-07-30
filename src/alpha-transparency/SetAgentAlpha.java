@@ -21,13 +21,7 @@ public class SetAgentAlpha implements Command {
   }
 
   public void perform(Argument args[], Context context) throws ExtensionException {
-    double alpha = 255;
-    try {
-      alpha = args[0].getDoubleValue();
-    }
-    catch (ExtensionException e) {
-      throw new ExtensionException(e.getMessage());
-    }
+    double alpha = args[0].getDoubleValue();
     if (context.getAgent().kind() == AgentKindJ.Patch() && !org.nlogo.api.Version$.MODULE$.is3D()) {
       throw new ExtensionException("Alpha for 2D patches cannot be changed.");
     }
@@ -44,11 +38,6 @@ public class SetAgentAlpha implements Command {
       newColor.add(rgb.get(i));
     }
     newColor.add(alpha);
-    try {
-      ColorManager.setAgentColor(context, newColor.toLogoList());
-    }
-    catch(ExtensionException e) {
-      throw new ExtensionException(e.getMessage());
-    }
+    ColorManager.setAgentColor(context, newColor.toLogoList());
   }
 }

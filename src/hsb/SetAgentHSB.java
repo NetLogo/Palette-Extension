@@ -23,14 +23,8 @@ public class SetAgentHSB implements Command {
   }
 
   public void perform(Argument args[], Context context) throws ExtensionException {
-    double newValue = 0;
-    try {
-      newValue = args[0].getDoubleValue();
-    }
-    catch (ExtensionException e) {
-      throw new ExtensionException(e.getMessage());
-    }
-    if (newValue < 0 || newValue > 100) {
+    double newValue = args[0].getDoubleValue();
+    if (newValue < 0 || newValue > range[index]) {
       throw new ExtensionException(type[index] + " must be in the range from 0 to " + range[index] + ".");
     }
     LogoList rgb = ColorManager.getAgentColor(context);

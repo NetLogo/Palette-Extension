@@ -25,13 +25,7 @@ public class ExtractRGB implements Reporter {
   }
 
   public Object report(Argument args[], Context context) throws ExtensionException {
-    LogoList rgb;
-    try {
-      rgb = ColorManager.extractColorFromArg(args[0]);
-    }
-    catch (ExtensionException e) {
-      throw new ExtensionException(e.getMessage());
-    }
+    LogoList rgb = ColorManager.extractColorFromArg(args[0]);
     return rgb.get(index);
   }
 }
