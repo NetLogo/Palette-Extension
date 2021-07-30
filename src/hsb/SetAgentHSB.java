@@ -11,7 +11,7 @@ public class SetAgentHSB implements Command {
 
   private int index;
   private String type[] = {"Hue", "Saturation", "Brightness"};
-  private int value[] = {360, 100, 100};
+  private int range[] = {360, 100, 100};
 
   public SetAgentHSB(int ind) {
     index = ind;
@@ -31,7 +31,7 @@ public class SetAgentHSB implements Command {
       throw new ExtensionException(e.getMessage());
     }
     if (newValue < 0 || newValue > 100) {
-      throw new ExtensionException(type[index] + " must be in the range from 0 to " + value[index] + ".");
+      throw new ExtensionException(type[index] + " must be in the range from 0 to " + range[index] + ".");
     }
     LogoList rgb = ColorManager.getAgentColor(context);
     rgb = HSBUpdated.updateHSB(rgb, newValue, index);
