@@ -1,6 +1,6 @@
 enablePlugins(org.nlogo.build.NetLogoExtension, org.nlogo.build.ExtensionDocumentationPlugin)
 
-version := "1.1.1"
+version := "2.0.0"
 
 netLogoExtName      := "palette"
 
