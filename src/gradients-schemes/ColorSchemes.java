@@ -301,13 +301,13 @@ public abstract strictfp class ColorSchemes
 	{
 		int [][][][] colorschemes = getRGBArray(schemeType);
 		int max = 0;
-		for (int i =0; i < colorschemes.length; i++)
+		for (int i =0; i < colorschemes.length - 1; i++)
 		{
-      //System.out.println("colorschemes[i].length: " + colorschemes[i].length);
-			max = Math.max(colorschemes[i].length, max);
-      //System.out.println("MAX: " + max);
+			max = Math.max(colorschemes[i].length,
+							   colorschemes[i + 1].length);
 		}
 		// We add 2 since the color schemes start at 3 colors
 		return(max + 2);
 	}
 }
+
