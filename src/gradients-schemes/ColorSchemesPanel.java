@@ -316,23 +316,12 @@ public class ColorSchemesPanel
     			// throw new ExtensionException( e.getMessage() ) ;
     		}
     		SpinnerNumberModel colorNumberModel = null;
+    		colorNumberModel = new SpinnerNumberModel(
+    				Math.min(colorSchemeMaxSize, spinnerNumberModel.getNumber().intValue()) ,  //init value
+    				3,  //min
+    				colorSchemeMaxSize, //max
+    				1); //step
 
-    		if (spinnerNumberModel.getNumber().intValue() > colorSchemeMaxSize)
-        	{
-        		colorNumberModel = new SpinnerNumberModel(
-        				colorSchemeMaxSize ,  //init value
-        				3,  //min
-        				colorSchemeMaxSize, //max
-        				1); //step
-        	}
-    		else
-    		{
-    					colorNumberModel = new SpinnerNumberModel(
-    					spinnerNumberModel.getNumber().intValue() ,  //init value
-        				3,  //min
-        				colorSchemeMaxSize, //max
-        				1); //step
-    		}
     		colorSizeJSpinner.setModel(colorNumberModel);
 
         }
@@ -341,6 +330,16 @@ public class ColorSchemesPanel
         	// If the user changed the color Legend
         	ImageIcon icon = (ImageIcon) legendJComboBox.getSelectedItem();
            	colorLegendName = icon.getDescription();
+          int schemeArray[][][] = {};
+          try {
+            schemeArray = ColorSchemes.getRGBArray(colorSchemeType, colorLegendName);
+          } catch (ExtensionException em) {
+            //throw new ExtensionException(em.getMessage());
+          }
+          int size = schemeArray.length + 2;
+          SpinnerNumberModel spinnerNumberModel = (SpinnerNumberModel) colorSizeJSpinner.getModel();
+          SpinnerNumberModel legendSpinner = new SpinnerNumberModel(Math.min(spinnerNumberModel.getNumber().intValue(), size), 3, size, 1);
+          colorSizeJSpinner.setModel(legendSpinner);
         }
         try
         {
