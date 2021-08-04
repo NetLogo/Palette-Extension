@@ -133,7 +133,8 @@ public class ScaleGradientHSB implements Reporter {
           gradientArray[j+ (SIZE * i)] = colorGradient.getHSBArray()[j];
           LogoListBuilder toRGB = new LogoListBuilder();
           for(int k = 0; k < 3; k++) { toRGB.add(gradientArray[j+ (SIZE * i)][k]); }
-          LogoList rgb = HSBUpdated.HSBtoRGB(toRGB.toLogoList());
+          HSBUpdated hu = new HSBUpdated();
+          LogoList rgb = hu.HSBtoRGB(toRGB.toLogoList());
           for(int k = 0; k < 3; k++) { gradientArray[j+ (SIZE * i)][k] = (double) rgb.get(k); }
         }
       }
