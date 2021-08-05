@@ -303,9 +303,7 @@ public abstract strictfp class ColorSchemes
 		int max = 0;
 		for (int i =0; i < colorschemes.length; i++)
 		{
-      //System.out.println("colorschemes[i].length: " + colorschemes[i].length);
 			max = Math.max(colorschemes[i].length, max);
-      //System.out.println("MAX: " + max);
 		}
 		// We add 2 since the color schemes start at 3 colors
 		return(max + 2);

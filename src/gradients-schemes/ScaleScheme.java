@@ -57,7 +57,7 @@ public class ScaleScheme implements Reporter
 		{
 			if( var < max)
 			{
-				perc = size - 1;
+				perc = 1.0 ;
 			}
 			else if ( var > min )
 			{
@@ -67,15 +67,14 @@ public class ScaleScheme implements Reporter
 			{
 				double tempval = min - var ;
 				double tempmax = min - max;
-        tempmax /= size;
-				perc = Math.floor(tempval / tempmax);
+				perc = tempval / tempmax ;
 			}
 		}
 		else
 		{
 			if( var > max )
 			{
-				perc = size - 1;
+				perc = 1.0 ;
 			}
 			else if ( var < min )
 			{
@@ -85,11 +84,11 @@ public class ScaleScheme implements Reporter
 			{
 				double tempval = var - min ;
 				double tempmax = max - min ;
-        tempmax /= (double) size;
-				perc = Math.floor(tempval / tempmax);
+				perc = tempval / tempmax ;
 			}
 		}
-		index = Math.min((int) perc, size-1);
+		index = (int) Math.ceil((perc * (size - 1))) ;
+
 		legend = ColorSchemes.getRGBArray(schemename, legendname, size);
 
 		LogoListBuilder list = new LogoListBuilder() ;
