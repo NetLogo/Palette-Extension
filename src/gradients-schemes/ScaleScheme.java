@@ -65,10 +65,10 @@ public class ScaleScheme implements Reporter
 			}
 			else
 			{
-				double tempval = min - var ;
-				double tempmax = min - max;
-        tempmax /= size;
-				perc = Math.floor(tempval / tempmax);
+				double tempval = min - var;
+				double tempmax = min - max; // these two lines determine how much of the scale should be alotted for each color
+        tempmax /= size; // see above comment
+				perc = Math.floor(tempval / tempmax); // see how many colors happen before the scaled number
 			}
 		}
 		else
@@ -83,10 +83,10 @@ public class ScaleScheme implements Reporter
 			}
 			else
 			{
-				double tempval = var - min ;
-				double tempmax = max - min ;
-        tempmax /= (double) size;
-				perc = Math.floor(tempval / tempmax);
+				double tempval = var - min;
+				double tempmax = max - min; // these two lines determine how much of the scale should be alotted for each color
+        tempmax /= (double) size; // see above comment
+				perc = Math.floor(tempval / tempmax); // see how many colors happen before the scaled number
 			}
 		}
 		index = Math.min((int) perc, size-1);
