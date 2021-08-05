@@ -1,9 +1,9 @@
 /**
- * This class contains the RGB values of the legend of the 
+ * This class contains the RGB values of the legend of the
  * Divergent Color Scheme.
  * Each field contains an array with several legends for a
  * different number of classes (classes in the statistical sense)
- * Each legend array contains the RGB values of the colors composing 
+ * Each legend array contains the RGB values of the colors composing
  * that class.
  * The methods to access the fields are inherited from the abstract class
  * ColorSchemes
@@ -12,7 +12,7 @@
 
 public strictfp class Sequential extends ColorSchemes  {
 
-	static final int 	YlOrBr	[][][] = {  									
+	static final int 	YlOrBr	[][][] = {
 		{	{	255	,	247	,	188	}	,
 			{	254	,	196	,	79	}	,
 			{	217	,	95	,	14	}	},
@@ -56,7 +56,7 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	153	,	52	,	4	}	,
 			{	102	,	37	,	6	}	}};
 
-	static final int 	Oranges	[][][] = {  									
+	static final int 	Oranges	[][][] = {
 		{	{	254	,	230	,	206	}	,
 			{	253	,	174	,	107	}	,
 			{	230	,	85	,	13	}	},
@@ -99,8 +99,8 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	217	,	72	,	1	}	,
 			{	166	,	54	,	3	}	,
 			{	127	,	39	,	4	}	}};
-	
-	static final int 	Reds	[][][] = {  									
+
+	static final int 	Reds	[][][] = {
 		{	{	254	,	224	,	210	}	,
 			{	252	,	146	,	114	}	,
 			{	222	,	45	,	38	}	},
@@ -143,9 +143,9 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	203	,	24	,	29	}	,
 			{	165	,	15	,	21	}	,
 			{	103	,	0	,	13	}	}};
-	
-	
-	static final int 	YlOrRd	[][][] = {  									
+
+
+	static final int 	YlOrRd	[][][] = {
 		{	{	255	,	237	,	160	}	,
 			{	254	,	178	,	76	}	,
 			{	240	,	59	,	32	}	},
@@ -187,9 +187,9 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	252	,	78	,	42	}	,
 			{	227	,	26	,	28	}	,
 			{	189	,	0	,	38	}	,
-			{	128	,	0	,	38	}	}};	
-	
-	static final int 	OrRd	[][][] = {  									
+			{	128	,	0	,	38	}	}};
+
+	static final int 	OrRd	[][][] = {
 		{	{	254	,	232	,	200	}	,
 			{	253	,	187	,	132	}	,
 			{	227	,	74	,	51	}	},
@@ -231,9 +231,9 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	239	,	101	,	72	}	,
 			{	215	,	48	,	31	}	,
 			{	179	,	0	,	0	}	,
-			{	127	,	0	,	0	}	}};	
-	
-	static final int 	PuRd	[][][] = {  									
+			{	127	,	0	,	0	}	}};
+
+	static final int 	PuRd	[][][] = {
 		{	{	231	,	225	,	239	}	,
 			{	201	,	148	,	199	}	,
 			{	221	,	28	,	119	}	},
@@ -275,9 +275,9 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	231	,	41	,	138	}	,
 			{	206	,	18	,	86	}	,
 			{	152	,	0	,	67	}	,
-			{	103	,	0	,	31	}	}};		
-	
-	static final int 	RdPu	[][][] = {  									
+			{	103	,	0	,	31	}	}};
+
+	static final int 	RdPu	[][][] = {
 		{	{	253	,	224	,	221	}	,
 			{	250	,	159	,	181	}	,
 			{	197	,	27	,	138	}	},
@@ -319,9 +319,9 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	221	,	52	,	151	}	,
 			{	174	,	1	,	126	}	,
 			{	122	,	1	,	119	}	,
-			{	73	,	0	,	106	}	}};	
+			{	73	,	0	,	106	}	}};
 
-	static final int 	BuPu	[][][] = {  									
+	static final int 	BuPu	[][][] = {
 		{	{	224	,	236	,	244	}	,
 			{	158	,	188	,	218	}	,
 			{	136	,	86	,	167	}	},
@@ -363,9 +363,9 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	140	,	107	,	177	}	,
 			{	136	,	65	,	157	}	,
 			{	129	,	15	,	124	}	,
-			{	77	,	0	,	75	}	}};	
-	
-	static final int 	Purples	[][][] = {  									
+			{	77	,	0	,	75	}	}};
+
+	static final int 	Purples	[][][] = {
 		{	{	239	,	237	,	245	}	,
 			{	188	,	189	,	220	}	,
 			{	117	,	107	,	177	}	},
@@ -410,8 +410,8 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	63	,	0	,	125	}	}};
 
 
-	
-	static final int 	PuBu	[][][] = {  									
+
+	static final int 	PuBu	[][][] = {
 		{	{	236	,	231	,	242	}	,
 			{	166	,	189	,	219	}	,
 			{	43	,	140	,	190	}	},
@@ -455,7 +455,7 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	4	,	90	,	141	}	,
 			{	2	,	56	,	88	}	}};
 
-	static final int 	Blues	[][][] = {  									
+	static final int 	Blues	[][][] = {
 		{	{	222	,	235	,	247	}	,
  			{	158	,	202	,	225	}	,
 			{	49	,	130	,	189	}	},
@@ -497,9 +497,9 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	66	,	146	,	198	}	,
 			{	33	,	113	,	181	}	,
 			{	8	,	81	,	156	}	,
-			{	8	,	48	,	107	}	}};	
+			{	8	,	48	,	107	}	}};
 
-	static final int 	GnBu	[][][] = {  									
+	static final int 	GnBu	[][][] = {
 		{	{	224	,	243	,	219	}	,
 			{	168	,	221	,	181	}	,
 			{	67	,	162	,	202	}	},
@@ -541,9 +541,9 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	78	,	179	,	211	}	,
 			{	43	,	140	,	190	}	,
 			{	8	,	104	,	172	}	,
-			{	8	,	64	,	129	}	}};	
-	
-	static final int 	YlGnBu	[][][] = {  									
+			{	8	,	64	,	129	}	}};
+
+	static final int 	YlGnBu	[][][] = {
 		{	{	237	,	248	,	177	}	,
 			{	127	,	205	,	187	}	,
 			{	44	,	127	,	184	}	},
@@ -587,8 +587,8 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	37	,	52	,	148	}	,
 			{	8	,	29	,	88	}	}};
 
-	
-	static final int 	PuBuGn	[][][] = {  									
+
+	static final int 	PuBuGn	[][][] = {
 		{	{	236	,	226	,	240	}	,
 			{	166	,	189	,	219	}	,
 			{	28	,	144	,	153	}	},
@@ -630,9 +630,9 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	54	,	144	,	192	}	,
 			{	2	,	129	,	138	}	,
 			{	1	,	108	,	89	}	,
-			{	1	,	70	,	54	}	}};	
-			
-	static final int 	BuGn	[][][] = {  									
+			{	1	,	70	,	54	}	}};
+
+	static final int 	BuGn	[][][] = {
 		{	{	229	,	245	,	249	}	,
 			{	153	,	216	,	201	}	,
 			{	44	,	162	,	95	}	},
@@ -676,8 +676,8 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	0	,	109	,	44	}	,
 			{	0	,	68	,	27	}	}};
 
-	static final int 											
-	Greens	[][][] = {  	
+	static final int
+	Greens	[][][] = {
 		{	{	229	,	245	,	224	}	,
 			{	161	,	217	,	155	}	,
 			{	49	,	163	,	84	}	},
@@ -719,9 +719,9 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	65	,	171	,	93	}	,
 			{	35	,	139	,	69	}	,
 			{	0	,	109	,	44	}	,
-			{	0	,	68	,	27	}	}};		
-	
-	static final int 	Greys	[][][] = {  									
+			{	0	,	68	,	27	}	}};
+
+	static final int 	Greys	[][][] = {
 		{	{	240	,	240	,	240	}	,
 			{	189	,	189	,	189	}	,
 			{	99	,	99	,	99	}	},
@@ -765,4 +765,47 @@ public strictfp class Sequential extends ColorSchemes  {
 			{	37	,	37	,	37	}	,
 			{	0	,	0	,	0	}	}};
 
-}	
+  static final int YlGn [][][] = {
+    { { 247, 252, 185 },
+      { 173, 221, 142 },
+      { 49, 163, 84   } },
+    { { 255, 255, 204 },
+      { 194, 230, 153 },
+      { 120, 198, 121 },
+      { 35, 132, 67   } },
+    { { 255, 255, 204 },
+      { 194, 230, 153 },
+      { 120, 198, 121 },
+      { 49, 163, 84   },
+      { 0, 104, 55    } },
+    { { 255, 255, 204 },
+      { 217, 240, 163 },
+      { 173, 221, 142 },
+      { 120, 198, 121 },
+      { 49, 163, 84   },
+      { 0, 104, 55    } },
+    { { 255, 255, 204 },
+      { 217, 240, 163 },
+      { 173, 221, 142 },
+      { 120, 198, 121 },
+      { 65, 171, 93   },
+      { 35, 132, 67   },
+      { 0, 90, 50     } },
+    { { 255, 255, 229 },
+      { 247, 252, 185 },
+      { 217, 240, 163 },
+      { 173, 221, 142 },
+      { 120, 198, 121 },
+      { 65, 171, 93   },
+      { 35, 132, 67   },
+      { 0, 90, 50     } },
+    { { 255, 255, 229 },
+      { 247, 252, 185 },
+      { 217, 240, 163 },
+      { 173, 221, 142 },
+      { 120, 198, 121 },
+      { 65, 171, 93   },
+      { 35, 132, 67   },
+      { 0, 104, 55    },
+      { 0, 69, 41     } } };
+}
