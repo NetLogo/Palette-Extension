@@ -66,6 +66,9 @@ Scale-Scheme3
   palette:scale-scheme "Divergent" "BrBG" 4 -2  0 40 => [166 97 26]
   palette:scale-scheme "Divergent" "BrBG" 4 42 40  0 => [166 97 26]
   palette:scale-scheme "Divergent" "BrBG" 4 -2 40  0 => [1 133 113]
+  palette:scale-scheme "Divergent" "BrBG" 9 3 10 0 => [128 205 193]
+  palette:scale-scheme "Divergent" "BrBG" 9 3 0 10 => [223 194 125]
+
 Scale-Scheme4
   extensions [palette]
   palette:scale-scheme "Qualitative" "Dark2" 5 0 255 0 => [102 166 30]
