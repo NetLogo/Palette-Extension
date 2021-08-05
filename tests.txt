@@ -73,6 +73,10 @@ Scale-Scheme4
   extensions [palette]
   palette:scale-scheme "Qualitative" "Dark2" 5 0 255 0 => [102 166 30]
 
+Scale-Scheme5
+  extensions [palette]
+  palette:scale-scheme "Divergent" "BrBG" 314 5 0 10 => ERROR Extension exception: BrBG has a maximum of 9 colors, but you have requested 314
+
 Alpha-Of
   extensions [palette]
   palette:alpha-of red => 255
