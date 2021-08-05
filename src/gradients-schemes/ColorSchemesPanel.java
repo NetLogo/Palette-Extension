@@ -142,7 +142,7 @@ public class ColorSchemesPanel
 
   //TODO: handle exception ...
   public void setLegend(String colorSchemeType, String colorLegendName, int colorSchemeSize)
-  throws ExtensionExceptio {
+  throws ExtensionException {
     this.colorSchemeType = colorSchemeType;
     this.colorLegendName = colorLegendName;
     this.colorSchemeSize = colorSchemeSize;
@@ -266,47 +266,21 @@ public class ColorSchemesPanel
   }
 
   public void actionPerformed(ActionEvent e) {
-    if (e.getSource() == schemeJComboBox) {
-      colorSchemeType = schemeJComboBox.getSelectedItem().toString();
-          // Change the legends names in the legendJComboBox to match the
-          // colorSchemeType
-      this.legendJComboBox.setModelFromString(colorSchemeType);
-        // get the colorLegendName
-      colorLegendName = ((ImageIcon) legendJComboBox.getSelectedItem()).getDescription();
+    colorSchemeType = schemeJComboBox.getSelectedItem().toString();
+     this.legendJComboBox.setModelFromString(colorSchemeType);
+     colorLegendName = ((ImageIcon) legendJComboBox.getSelectedItem()).getDescription();
 
-        // if the colorSchemeType does not have a legend with that name
-      SpinnerNumberModel spinnerNumberModel = (SpinnerNumberModel) colorSizeJSpinner.getModel();
-      colorSchemeSize = spinnerNumberModel.getNumber().intValue();
-      int colorSchemeMaxSize = 0;
-      try {
-        colorSchemeMaxSize = ColorSchemes.getMaximumLegendSize(colorSchemeType);
-      }
-      catch(ExtensionException ex) {
-        // throw new ExtensionException( e.getMessage() ) ;
-      }
-      SpinnerNumberModel colorNumberModel = null;
-
-      if (spinnerNumberModel.getNumber().intValue() > colorSchemeMaxSize) {
-        colorNumberModel = new SpinnerNumberModel(
-              colorSchemeMaxSize ,  //init value
-              3,  //min
-              colorSchemeMaxSize, //max
-              1); //step
-      }
-      else {
-        colorNumberModel = new SpinnerNumberModel(
-        spinnerNumberModel.getNumber().intValue() ,  //init value
-          3,  //min
-          colorSchemeMaxSize, //max
-          1); //step
-      }
-      colorSizeJSpinner.setModel(colorNumberModel);
-    }
-    else if (e.getSource() == legendJComboBox) {
-        // If the user changed the color Legend
-      ImageIcon icon = (ImageIcon) legendJComboBox.getSelectedItem();
-      colorLegendName = icon.getDescription();
-    }
+     SpinnerNumberModel spinnerNumberModel = (SpinnerNumberModel) colorSizeJSpinner.getModel();
+     ImageIcon icon = (ImageIcon) legendJComboBox.getSelectedItem();
+     colorLegendName = icon.getDescription();
+     int schemeArray[][][] = {};
+     try {
+       schemeArray = ColorSchemes.getRGBArray(colorSchemeType, colorLegendName);
+     } catch (ExtensionException em) { }
+     colorSchemeSize = schemeArray.length + 2;
+     SpinnerNumberModel legendSpinner = new SpinnerNumberModel(Math.min(spinnerNumberModel.getNumber().intValue(), colorSchemeSize), 3, colorSchemeSize, 1);
+     colorSchemeSize = Math.min(spinnerNumberModel.getNumber().intValue(), colorSchemeSize); // changing to match the spinner number, displayLegend() will use this
+     colorSizeJSpinner.setModel(legendSpinner);
     try {
       displayLegend();
     }
