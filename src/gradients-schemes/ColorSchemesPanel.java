@@ -42,7 +42,6 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -57,8 +56,7 @@ import org.nlogo.api.LogoException;
 
 public class ColorSchemesPanel
   extends JPanel
-  implements ChangeListener, ActionListener
-  {
+  implements ChangeListener, ActionListener {
   private static final long serialVersionUID = 1L;
   JSpinner             colorSizeJSpinner;
   JComboBox<String>    schemeJComboBox;
@@ -71,16 +69,16 @@ public class ColorSchemesPanel
   int colorSchemeSize    = 5;
   int[][] colorSchemeRGBArray;
 
-    static final int START_INDEX = 0;
-    static final int LEGEND_LABEL_SIZE = 30;
-    static final int MAX_LEGEND_LABEL = 12;
+  static final int START_INDEX = 0;
+  static final int LEGEND_LABEL_SIZE = 30;
+  static final int MAX_LEGEND_LABEL = 12;
 
 
   public ColorSchemesPanel (JLabel statusLabel_)
   throws ExtensionException {
     super();
 
-      statusLabel = statusLabel_;
+    statusLabel = statusLabel_;
     setLayout(new BorderLayout());
     JPanel topPanel  = new JPanel(new FlowLayout(FlowLayout.LEFT));
     add(topPanel, BorderLayout.CENTER);
@@ -108,7 +106,7 @@ public class ColorSchemesPanel
     topPanel.add(colorSizeJSpinner);
     colorSizeJSpinner.addChangeListener(this);
 
-        //Create the JLabel legend
+      //Create the JLabel legend
     legendLabel = new JLabel();
     ImageIcon initialIcon =
       new ColorSchemesIconImage(
@@ -128,24 +126,23 @@ public class ColorSchemesPanel
 
         //FIXME: This could be done cleaner, get read of arbitrary constants
         //       calculate the required height and widht better ...
-        Dimension dim1 = new Dimension (schemeJComboBox.getPreferredSize().width   +
+    Dimension dim1 = new Dimension (schemeJComboBox.getPreferredSize().width   +
                         legendJComboBox.getPreferredSize().width   +
                               colorSizeJSpinner.getPreferredSize().width +
                               LEGEND_LABEL_SIZE * MAX_LEGEND_LABEL + 30,
                               LEGEND_LABEL_SIZE + 40 );
-        this.setSize(dim1);
-        setPreferredSize(dim1);
+    this.setSize(dim1);
+    setPreferredSize(dim1);
 
     statusLabel.setText(" \"" +
         colorSchemeType + "\"  \"" +
         colorLegendName + "\" " +
         colorSchemeSize);
-    }
+  }
 
   //TODO: handle exception ...
   public void setLegend(String colorSchemeType, String colorLegendName, int colorSchemeSize)
-  throws ExtensionException
-  {
+  throws ExtensionExceptio {
     this.colorSchemeType = colorSchemeType;
     this.colorLegendName = colorLegendName;
     this.colorSchemeSize = colorSchemeSize;
@@ -165,153 +162,157 @@ public class ColorSchemesPanel
    * returns a an int[][] Array containing the selected
    * ColorScheme. For example,
    */
-  public int[][] getColorSchemeRGBArray  ()
-  throws ExtensionException
-  {
+  public int[][] getColorSchemeRGBArray()
+  throws ExtensionException {
     return ColorSchemes.getRGBArray(colorSchemeType,
                     colorLegendName,
                     colorSchemeSize);
   }
 
-  public Color [] getColorSchemeColorArray  ()
-  throws ExtensionException
-  {
+  public Color[] getColorSchemeColorArray()
+  throws ExtensionException {
     return ColorSchemes.getColorArray(colorSchemeType,
                       colorLegendName,
                       colorSchemeSize);
   }
 
-  public String getColorSchemeString  ()
-  {
+  public String getColorSchemeString() {
     return (colorSchemeType + " " +
-        colorLegendName + " " +
-        String.valueOf(colorSchemeSize));
+      colorLegendName + " " +
+      String.valueOf(colorSchemeSize));
   }
 
   public boolean legendExists (String LegendName)
-  throws ExtensionException
-  {
-      colorSchemeRGBArray = ColorSchemes.getRGBArray(
-        colorSchemeType,
-        LegendName,
-        colorSchemeSize);
+  throws ExtensionException {
+    colorSchemeRGBArray = ColorSchemes.getRGBArray(
+      colorSchemeType,
+      LegendName,
+      colorSchemeSize);
 
-    if (colorSchemeRGBArray == null)
-    {
-        return false;
+    if (colorSchemeRGBArray == null) {
+      return false;
     }
-    else
-    {
+    else {
       return true;
     }
-
   }
 
   // Display the final choosen legend
   public void displayLegend()
-  throws ExtensionException
-  {
-      colorSchemeRGBArray = ColorSchemes.getRGBArray(
-        colorSchemeType,
-        colorLegendName,
-        colorSchemeSize);
+  throws ExtensionException {
+    colorSchemeRGBArray = ColorSchemes.getRGBArray(
+    colorSchemeType,
+    colorLegendName,
+    colorSchemeSize);
 
-      if (colorSchemeRGBArray != null)
-      {
-
-          legendLabel.setText(null);
-        legendLabel.setIcon(new ColorSchemesIconImage(
-            ColorSchemes.getRGBArray(
-                colorSchemeType, colorLegendName, colorSchemeSize),
-                LEGEND_LABEL_SIZE));
-
+    if (colorSchemeRGBArray != null) {
+      legendLabel.setText(null);
+      legendLabel.setIcon(new ColorSchemesIconImage(
+      ColorSchemes.getRGBArray(
+          colorSchemeType, colorLegendName, colorSchemeSize),
+          LEGEND_LABEL_SIZE));
+    }
+    else {
+      legendLabel.setIcon(null);
+      // Using html for auto wrapping
+      if (colorSchemeType.equals("Sequential")) {
+        legendLabel.setText("<html>No sequential scheme available, " +
+                    "select less or equal than 10</html>");
       }
-      else
-      {
-
-          legendLabel.setIcon(null);
-          // Using html for auto wrapping
-          if (colorSchemeType.equals("Sequential"))
-            {
-              legendLabel.setText("<html>No sequential scheme available, " +
-                        "select less or equal than 10</html>");
-            }
-          if (colorSchemeType.equals("Divergent"))
-              {
-              legendLabel.setText("<html>No Divergent scheme available, " +
-                        "select less or equal than 11</html>");
-              }
-           if (colorSchemeType.equals("Qualitative"))
-              {
-               legendLabel.setText("<html>Choose an enabled legend</html>");
-               if (!(legendJComboBox.isPopupVisible() ))
-             {
-             legendJComboBox.showPopup();
-             }
-              }
+      if (colorSchemeType.equals("Divergent")) {
+        legendLabel.setText("<html>No Divergent scheme available, " +
+                    "select less or equal than 11</html>");
       }
+      if (colorSchemeType.equals("Qualitative")) {
+        legendLabel.setText("<html>Choose an enabled legend</html>");
+        if (!(legendJComboBox.isPopupVisible() )) {
+          legendJComboBox.showPopup();
+        }
+      }
+    }
   }
 
   public void displayLegend(String colorLegendName)
-  throws ExtensionException
-  {
-      colorSchemeRGBArray = ColorSchemes.getRGBArray(
+  throws ExtensionException {
+    colorSchemeRGBArray = ColorSchemes.getRGBArray(
         colorSchemeType,
         colorLegendName,
         colorSchemeSize);
 
-      if (colorSchemeRGBArray != null)
-      {
-          legendLabel.setText(null);
-        legendLabel.setIcon(new ColorSchemesIconImage(
-                  ColorSchemes.getRGBArray(
-                    colorSchemeType, colorLegendName, colorSchemeSize),
-                    LEGEND_LABEL_SIZE));
+    if (colorSchemeRGBArray != null) {
+      legendLabel.setText(null);
+      legendLabel.setIcon(new ColorSchemesIconImage(
+                ColorSchemes.getRGBArray(
+                  colorSchemeType, colorLegendName, colorSchemeSize),
+                  LEGEND_LABEL_SIZE));
+    }
+    else {
+      legendLabel.setIcon(null);
+      if (colorSchemeType.equals("Sequential")) {
+        legendLabel.setText("No sequential scheme available, " +
+                    "select less or equal than 10");
       }
-      else
-      {
-          legendLabel.setIcon(null);
-          if (colorSchemeType.equals("Sequential"))
-            {
-              legendLabel.setText("No sequential scheme available, " +
-                        "select less or equal than 10");
-            }
-          if (colorSchemeType.equals("Divergent"))
-              {
-              legendLabel.setText("No Divergent scheme available, " +
-                        "select less or equal than 11");
-              }
-           if (colorSchemeType.equals("Qualitative"))
-              {
-           legendLabel.setText("<html>Choose an enabled legend</html>");
-           if (!(legendJComboBox.isPopupVisible() ))
-             {
-             legendJComboBox.showPopup();
-             }
-           }
+      if (colorSchemeType.equals("Divergent")) {
+        legendLabel.setText("No Divergent scheme available, " +
+                    "select less or equal than 11");
       }
+      if (colorSchemeType.equals("Qualitative")) {
+        legendLabel.setText("<html>Choose an enabled legend</html>");
+        if (!(legendJComboBox.isPopupVisible())) {
+          legendJComboBox.showPopup();
+        }
+      }
+    }
   }
 
   public void actionPerformed(ActionEvent e) {
-    colorSchemeType = schemeJComboBox.getSelectedItem().toString();
-    this.legendJComboBox.setModelFromString(colorSchemeType);
-    colorLegendName = ((ImageIcon) legendJComboBox.getSelectedItem()).getDescription();
+    if (e.getSource() == schemeJComboBox) {
+      colorSchemeType = schemeJComboBox.getSelectedItem().toString();
+          // Change the legends names in the legendJComboBox to match the
+          // colorSchemeType
+      this.legendJComboBox.setModelFromString(colorSchemeType);
+        // get the colorLegendName
+      colorLegendName = ((ImageIcon) legendJComboBox.getSelectedItem()).getDescription();
 
-    SpinnerNumberModel spinnerNumberModel = (SpinnerNumberModel) colorSizeJSpinner.getModel();
-    ImageIcon icon = (ImageIcon) legendJComboBox.getSelectedItem();
-    colorLegendName = icon.getDescription();
-    int schemeArray[][][] = {};
-    try {
-      schemeArray = ColorSchemes.getRGBArray(colorSchemeType, colorLegendName);
-    } catch (ExtensionException em) { }
-    colorSchemeSize = schemeArray.length + 2;
-    SpinnerNumberModel legendSpinner = new SpinnerNumberModel(Math.min(spinnerNumberModel.getNumber().intValue(), colorSchemeSize), 3, colorSchemeSize, 1);
-    colorSchemeSize = Math.min(spinnerNumberModel.getNumber().intValue(), colorSchemeSize); // changing to match the spinner number, displayLegend() will use this
-    colorSizeJSpinner.setModel(legendSpinner);
+        // if the colorSchemeType does not have a legend with that name
+      SpinnerNumberModel spinnerNumberModel = (SpinnerNumberModel) colorSizeJSpinner.getModel();
+      colorSchemeSize = spinnerNumberModel.getNumber().intValue();
+      int colorSchemeMaxSize = 0;
+      try {
+        colorSchemeMaxSize = ColorSchemes.getMaximumLegendSize(colorSchemeType);
+      }
+      catch(ExtensionException ex) {
+        // throw new ExtensionException( e.getMessage() ) ;
+      }
+      SpinnerNumberModel colorNumberModel = null;
+
+      if (spinnerNumberModel.getNumber().intValue() > colorSchemeMaxSize) {
+        colorNumberModel = new SpinnerNumberModel(
+              colorSchemeMaxSize ,  //init value
+              3,  //min
+              colorSchemeMaxSize, //max
+              1); //step
+      }
+      else {
+        colorNumberModel = new SpinnerNumberModel(
+        spinnerNumberModel.getNumber().intValue() ,  //init value
+          3,  //min
+          colorSchemeMaxSize, //max
+          1); //step
+      }
+      colorSizeJSpinner.setModel(colorNumberModel);
+    }
+    else if (e.getSource() == legendJComboBox) {
+        // If the user changed the color Legend
+      ImageIcon icon = (ImageIcon) legendJComboBox.getSelectedItem();
+      colorLegendName = icon.getDescription();
+    }
     try {
       displayLegend();
     }
-    catch(ExtensionException ex) { }
+    catch(ExtensionException ex) {
+
+    }
     statusLabel.setText(" \"" +
         colorSchemeType + "\"  \"" +
         colorLegendName + "\" " +
@@ -325,7 +326,7 @@ public class ColorSchemesPanel
     try {
       displayLegend();
     }
-    catch(ExtensionException ex) { }
+    catch(ExtensionException ex) {  }
     legendJComboBox.repaint();
     statusLabel.setText(" \"" +
         colorSchemeType + "\"  \"" +
