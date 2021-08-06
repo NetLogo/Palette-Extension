@@ -217,7 +217,7 @@ public class ColorSchemesPanel
       // Using html for auto wrapping
       if (colorSchemeType.equals("Sequential")) {
         legendLabel.setText("<html>No sequential scheme available, " +
-                    "select less or equal than 10</html>");
+                    "select less or equal than 9</html>");
       }
       if (colorSchemeType.equals("Divergent")) {
         legendLabel.setText("<html>No Divergent scheme available, " +
@@ -250,7 +250,7 @@ public class ColorSchemesPanel
       legendLabel.setIcon(null);
       if (colorSchemeType.equals("Sequential")) {
         legendLabel.setText("No sequential scheme available, " +
-                    "select less or equal than 10");
+                    "select less or equal than 9");
       }
       if (colorSchemeType.equals("Divergent")) {
         legendLabel.setText("No Divergent scheme available, " +
