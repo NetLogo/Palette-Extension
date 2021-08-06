@@ -95,7 +95,7 @@ public class ColorSchemesPanel
     topPanel.add(this.legendJComboBox);
     legendJComboBox.addActionListener(this);
 
-        //Add the Number of Colors
+    //Add the Number of Colors
     int SequencialSchemeMaxSize = ColorSchemes.getMaximumLegendSize("Sequential");
     SpinnerNumberModel colorNumberModel = new SpinnerNumberModel(
                                        5,  //init
@@ -106,7 +106,7 @@ public class ColorSchemesPanel
     topPanel.add(colorSizeJSpinner);
     colorSizeJSpinner.addChangeListener(this);
 
-      //Create the JLabel legend
+    //Create the JLabel legend
     legendLabel = new JLabel();
     ImageIcon initialIcon =
       new ColorSchemesIconImage(
@@ -124,8 +124,8 @@ public class ColorSchemesPanel
     colorLegendName = ((ImageIcon)
                    legendJComboBox.getSelectedItem()).getDescription();
 
-        //FIXME: This could be done cleaner, get read of arbitrary constants
-        //       calculate the required height and widht better ...
+    //FIXME: This could be done cleaner, get read of arbitrary constants
+    //       calculate the required height and width better ...
     Dimension dim1 = new Dimension (schemeJComboBox.getPreferredSize().width   +
                         legendJComboBox.getPreferredSize().width   +
                               colorSizeJSpinner.getPreferredSize().width +
