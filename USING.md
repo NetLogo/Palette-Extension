@@ -101,9 +101,12 @@ You can learn more about the use of these color collections in the original Colo
 
 ### Example Models
 
-There is an example of using the palette primitives in the Code Examples section of the models library:
+There are a few examples of using the palette primitives in the Code Examples section of the models library:
 
 * Palette Example
+* Color Bubbles
+* Color Painting
+* Color Reveal
 
 And one Sample Model that uses the extension:
 
