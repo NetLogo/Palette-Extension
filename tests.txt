@@ -28,6 +28,9 @@ Gradient-Scale5
   palette:scale-gradient [[215 50 41] [52 93 169]] 255 0 100 => [52 92 168]
   palette:scale-gradient [[215 50 41] [52 93 169]] 100 100 0 => [215 50 41]
   palette:scale-gradient [[215 50 41] [52 93 169]] 255 100 0 => [215 50 41]
+  palette:scale-gradient [[100 100 100] [50 50 50]] 0 1 1 => [100 100 100]
+  palette:scale-gradient [[100 100 100] [50 50 50]] 1 1 1 => [100 100 100]
+  palette:scale-gradient [[100 100 100] [50 50 50]] 2 1 1 => [50 50 50]
 
 Scale-Gradient-HSB
   extensions [palette]
@@ -43,6 +46,10 @@ Scale-Gradient-HSB
   palette:scale-gradient-hsb [[180 57 77] [60 79 93]] 175 0 100 => [237 237 50]
   palette:scale-gradient-hsb [[180 57 77] [60 79 93]] 100 100 0 => [84 196 196]
   palette:scale-gradient-hsb [[180 57 77] [60 79 93]] 175 100 0 => [84 196 196]
+  palette:scale-gradient-hsb [[30 100 0] [120 0 0]] 0 1 1 => [0 0 0]
+  palette:scale-gradient-hsb [[30 100 10] [120 10 10]] 0 1 1 => [26 13 0]
+  palette:scale-gradient-hsb [[30 100 10] [120 10 10]] 1 1 1 => [26 13 0]
+  palette:scale-gradient-hsb [[30 100 10] [120 10 10]] 7 1 1 => [23 26 23]
 
 Scale-Scheme1
   extensions [palette]
@@ -68,6 +75,9 @@ Scale-Scheme3
   palette:scale-scheme "Divergent" "BrBG" 4 -2 40  0 => [1 133 113]
   palette:scale-scheme "Divergent" "BrBG" 9 3 10 0 => [128 205 193]
   palette:scale-scheme "Divergent" "BrBG" 9 3 0 10 => [223 194 125]
+  palette:scale-scheme "Qualitative" "Set3" 7 0 1 1 => [141 211 199]
+  palette:scale-scheme "Qualitative" "Set3" 7 1 1 1 => [141 211 199]
+  palette:scale-scheme "Qualitative" "Set3" 7 2 1 1 => [179 222 105]
 
 Scale-Scheme4
   extensions [palette]
