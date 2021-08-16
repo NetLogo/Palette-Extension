@@ -49,9 +49,9 @@ public class ScaleScheme implements Reporter {
       double perc = 0.0 ;
 
       // Case value maps to first endpoint
-      if ((max > min) && ( var < min ) || (min > max) && ( var > min)) {
+      if ((max >= min) && (var <= min) || (min > max) && (var > min)) {
         index = 0;
-      } else if ((min > max) && ( var < max) || (max > min) && ( var > max)) {
+      } else if ((min > max) && ( var < max) || (max >= min) && ( var > max)) {
         // Case value maps to last endpoint
         index = size - 1;
       } else {
