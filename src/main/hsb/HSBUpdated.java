@@ -28,7 +28,10 @@ public class HSBUpdated {
   }
 
   public static LogoList HSBtoRGB(LogoList hsb) {
-    Double h = new Double((double) hsb.get(0)); Double s = new Double((double) hsb.get(1)); Double b = new Double((double) hsb.get(2)); //prep for float conversion
+    //prep for float conversion
+    Double h = Double.valueOf((double) hsb.get(0));
+    Double s = Double.valueOf((double) hsb.get(1));
+    Double b = Double.valueOf((double) hsb.get(2));
     int newRGBint = java.awt.Color.HSBtoRGB(h.floatValue() / 360.0f, s.floatValue() / 100.0f, b.floatValue() / 100.0f); //get new rgb
 
     //convert rgbint to new RGBA list
