@@ -1,21 +1,17 @@
-enablePlugins(org.nlogo.build.NetLogoExtension, org.nlogo.build.ExtensionDocumentationPlugin)
+import org.nlogo.build.{ NetLogoExtension, ExtensionDocumentationPlugin }
 
-version := "2.0.1"
+enablePlugins(NetLogoExtension, ExtensionDocumentationPlugin)
 
+version    := "2.0.1"
+isSnapshot := true
+
+netLogoVersion      := "6.2.2"
 netLogoExtName      := "palette"
-
 netLogoClassManager := "PaletteExtension"
 
-netLogoTarget :=
-  org.nlogo.build.NetLogoExtension.directoryTarget(baseDirectory.value)
+javaSource in Compile := baseDirectory.value / "src" / "main"
+javacOptions ++= Seq("-g", "-Xlint:deprecation", "-Xlint:all", "-Xlint:-serial", "-Xlint:-path", "-encoding", "us-ascii")
 
-netLogoZipSources   := false
-
-javaSource in Compile := baseDirectory.value / "src"
-
-javacOptions ++= Seq("-g", "-Xlint:deprecation", "-Xlint:all", "-Xlint:-serial", "-Xlint:-path",
-  "-encoding", "us-ascii")
-
-resolvers      += "netlogo" at "https://dl.cloudsmith.io/public/netlogo/netlogo/maven/"
-netLogoVersion := "6.2.0-d27b502"
-isSnapshot := true
+scalaVersion := "2.12.12"
+scalaSource in Test := baseDirectory.value / "src" / "test"
+scalacOptions ++= Seq("-deprecation", "-unchecked", "-Xfatal-warnings", "-feature", "-encoding", "us-ascii")

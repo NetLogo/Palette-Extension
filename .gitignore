@@ -1,5 +1,5 @@
-target/
-/palette.jar
-/palette.zip
-/palette.jar.pack.gz
 .bundledFiles
+target/
+extensions/
+/*.jar
+/*.zip
