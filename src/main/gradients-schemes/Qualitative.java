@@ -10,7 +10,7 @@
  */
 
 
-public strictfp class Qualitative extends ColorSchemes {
+public class Qualitative extends ColorSchemes {
 		
 	static final int 	Accent	[][][] = {  									
 		{	{	127	,	201	,	127	}	,

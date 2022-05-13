@@ -10,7 +10,7 @@
  */
 
 
- public strictfp class Divergent extends ColorSchemes {
+ public class Divergent extends ColorSchemes {
 
 	static final int 	PuOr	[][][] = {  									
 		{	{	241	,	163	,	64	}	,

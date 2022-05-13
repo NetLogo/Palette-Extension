@@ -10,7 +10,7 @@
  */
 
 
-public strictfp class Sequential extends ColorSchemes  {
+public class Sequential extends ColorSchemes  {
 
   static final int   YlOrBr  [][][] = {
     {  {  255  ,  247  ,  188  }  ,

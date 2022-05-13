@@ -3,7 +3,7 @@ import java.lang.reflect.Field;
 
 import org.nlogo.api.ExtensionException;
 
-abstract strictfp class Scheme
+abstract class Scheme
 {
 	public static int[][] getRGBArray(String schemeTypeName,
 									  String colorSchemeName,

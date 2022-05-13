@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 
 import org.nlogo.api.ExtensionException;
 
-public abstract strictfp class ColorSchemes {
+public abstract class ColorSchemes {
 
   //TODO: calculate the maxColorSchem in function of the getMaximumLegendSize
   //      this means that maxColorScheme will be 9, 11 or 12 depending upon what
