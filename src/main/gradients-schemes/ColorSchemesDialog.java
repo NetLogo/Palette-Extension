@@ -106,14 +106,9 @@ ClipboardOwner {
     /** This method handles events for the text field. */
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == copyButton) {
-      SecurityManager sm = System.getSecurityManager();
-      if (sm != null) {
-        try {
-          sm.checkPermission(new AWTPermission("accessClipboard"));
-        } catch (Exception ex) {
-          ex.printStackTrace();
-        }
-      }
+      // The java.lang.SecurityManager API has been terminally deprecated.
+      // I removed its use here. See https://openjdk.java.net/jeps/411 for a
+      // discussion of why it is being removed. AAB May 2022
       Toolkit tk = Toolkit.getDefaultToolkit();
       StringSelection st = new StringSelection(statusLabel.getText());
       Clipboard cp = tk.getSystemClipboard();
