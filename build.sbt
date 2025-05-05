@@ -5,7 +5,7 @@ enablePlugins(NetLogoExtension, ExtensionDocumentationPlugin)
 version    := "2.0.1"
 isSnapshot := true
 
-netLogoVersion      := "7.0.0-internal1"
+netLogoVersion      := "7.0.0-internal1-df97144"
 netLogoExtName      := "palette"
 netLogoClassManager := "PaletteExtension"
 
