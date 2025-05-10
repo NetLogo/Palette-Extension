@@ -7,7 +7,6 @@ import org.nlogo.api.LogoException;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
 import org.nlogo.window.GUIWorkspace;
-import org.nlogo.window.GUIWorkspaceScala;
 
 public class SchemeDialog implements Command {
 	public Syntax getSyntax() {
@@ -20,7 +19,7 @@ public class SchemeDialog implements Command {
 
 	public void perform(Argument args[], Context context)
 		throws ExtensionException, LogoException {
-      java.awt.Frame frame  = ((GUIWorkspaceScala)context.workspace()).getFrame();
+      java.awt.Frame frame  = ((GUIWorkspace)context.workspace()).getFrame();
   		ColorSchemesDialog csd = new ColorSchemesDialog(frame);
 		csd.showDialog();
 	}
