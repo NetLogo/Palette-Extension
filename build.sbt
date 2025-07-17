@@ -6,7 +6,7 @@ name       := "palette"
 version    := "2.0.1"
 isSnapshot := true
 
-netLogoVersion      := "7.0.0-beta1-c8d671e"
+netLogoVersion      := "7.0.0-beta2-8cd3e65"
 netLogoClassManager := "PaletteExtension"
 
 Compile / javaSource := baseDirectory.value / "src" / "main"
