@@ -3,7 +3,7 @@ import org.nlogo.build.{ NetLogoExtension, ExtensionDocumentationPlugin }
 enablePlugins(NetLogoExtension, ExtensionDocumentationPlugin)
 
 name       := "palette"
-version    := "2.0.1"
+version    := "2.1.0"
 isSnapshot := true
 
 netLogoVersion      := "7.0.0-beta2-8cd3e65"
