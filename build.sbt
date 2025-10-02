@@ -6,7 +6,7 @@ name       := "palette"
 version    := "2.1.0"
 isSnapshot := true
 
-netLogoVersion      := "7.0.0-424b50b"
+netLogoVersion      := "7.0.0-2486d1e"
 netLogoClassManager := "PaletteExtension"
 
 Compile / javaSource := baseDirectory.value / "src" / "main"
@@ -15,5 +15,3 @@ javacOptions ++= Seq("-g", "-Xlint:deprecation", "-encoding", "us-ascii", "--rel
 scalaVersion := "3.7.0"
 Test / scalaSource := baseDirectory.value / "src" / "test"
 scalacOptions ++= Seq("-deprecation", "-unchecked", "-Xfatal-warnings", "-feature", "-encoding", "us-ascii", "-release", "11")
-
-resolvers += "jitpack" at "https://jitpack.io"
