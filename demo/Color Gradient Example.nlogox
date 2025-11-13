@@ -11,12 +11,12 @@ to full-scale-color
   __clear-all-and-reset-ticks
 ask patches
   [
-      let normalized-value  (pxcor + (pycor * world-width)) / 
-                            (world-width * world-height) 
-      let patch-value normalized-value  * 10 + 5  
+      let normalized-value  (pxcor + (pycor * world-width)) /
+                            (world-width * world-height)
+      let patch-value normalized-value  * 10 + 5
       set plabel round patch-value
       ; change the color name to see another hue
-      set pcolor scale-color (red - 5) patch-value  0 10 
+      set pcolor scale-color (red - 5) patch-value  0 10
    ]
 end
 
@@ -29,12 +29,12 @@ to tint-scale-color
   __clear-all-and-reset-ticks
 ask patches
   [
-      let normalized-value  (pxcor + (pycor * world-width)) / 
-                            (world-width * world-height) 
-      let patch-value normalized-value  * 10 + 5  
+      let normalized-value  (pxcor + (pycor * world-width)) /
+                            (world-width * world-height)
+      let patch-value normalized-value  * 10 + 5
       set plabel round patch-value
       ; note the change from the range1 of full-scale-color from 0 to -10
-      set pcolor scale-color (red - 5) patch-value -10 10 
+      set pcolor scale-color (red - 5) patch-value -10 10
    ]
 end
 
@@ -47,12 +47,12 @@ to shade-scale-color
   __clear-all-and-reset-ticks
 ask patches
   [
-      let normalized-value  (pxcor + (pycor * world-width)) / 
-                            (world-width * world-height) 
-      let patch-value normalized-value  * 10 + 5  
+      let normalized-value  (pxcor + (pycor * world-width)) /
+                            (world-width * world-height)
+      let patch-value normalized-value  * 10 + 5
       set plabel round patch-value
       ; note the change in the range2 of full-scale-color from 10 to 20
-      set pcolor scale-color (red - 5) patch-value  0 20 
+      set pcolor scale-color (red - 5) patch-value  0 20
    ]
 end
 
@@ -65,11 +65,11 @@ to simple-rgb-gradient
   __clear-all-and-reset-ticks
 ask patches
   [
-      let normalized-value  (pxcor + (pycor * world-width)) / 
-                            (world-width * world-height) 
-      let patch-value normalized-value  * 255 + 128  
+      let normalized-value  (pxcor + (pycor * world-width)) /
+                            (world-width * world-height)
+      let patch-value normalized-value  * 255 + 128
       set plabel round patch-value
-      set pcolor   ( list  ( 255 - patch-value )  0 patch-value ) 
+      set pcolor   ( list  ( 255 - patch-value )  0 patch-value )
    ]
 end
 
@@ -83,11 +83,11 @@ to palette-rgb-gradient
   __clear-all-and-reset-ticks
 ask patches
   [
-      let normalized-value  (pxcor + (pycor * world-width)) / 
-                            (world-width * world-height) 
-      let patch-value normalized-value  * 10 + 5  
+      let normalized-value  (pxcor + (pycor * world-width)) /
+                            (world-width * world-height)
+      let patch-value normalized-value  * 10 + 5
       set plabel round patch-value
-      set pcolor palette:scale-gradient  
+      set pcolor palette:scale-gradient
         [  [ 255 0 0 ]  [0 0 255] ] patch-value 0 10
    ]
 end
@@ -101,11 +101,11 @@ to rgb-multi-gradient
   __clear-all-and-reset-ticks
 ask patches
   [
-      let normalized-value  (pxcor + (pycor * world-width)) / 
-                            (world-width * world-height) 
-      let patch-value normalized-value  * 10 + 5  
+      let normalized-value  (pxcor + (pycor * world-width)) /
+                            (world-width * world-height)
+      let patch-value normalized-value  * 10 + 5
       set plabel round patch-value
-      set pcolor palette:scale-gradient  
+      set pcolor palette:scale-gradient
         [  [ 255 0 0 ] [ 255 255 0 ] [0 0 255]] patch-value 0 10
    ]
 end
@@ -118,12 +118,12 @@ to normal-scale-scheme
   ;; of the procedure.)
   __clear-all-and-reset-ticks
 ask patches
-  [ 
-      let normalized-value  (pxcor + (pycor * world-width)) / 
-                            (world-width * world-height) 
+  [
+      let normalized-value  (pxcor + (pycor * world-width)) /
+                            (world-width * world-height)
       let patch-value normalized-value  * 10  + 5
       set plabel precision  patch-value 1
-      set pcolor palette:scale-scheme 
+      set pcolor palette:scale-scheme
         "Sequential" "Reds" 9 patch-value 0 10
   ]
 end
@@ -137,11 +137,11 @@ to rgb-color-scale-gradient
   __clear-all-and-reset-ticks
 ask patches
   [
-      let normalized-value  (pxcor + (pycor * world-width)) / 
-                            (world-width * world-height) 
-      let patch-value normalized-value  * 10 + 5  
+      let normalized-value  (pxcor + (pycor * world-width)) /
+                            (world-width * world-height)
+      let patch-value normalized-value  * 10 + 5
       set plabel round patch-value
-      set pcolor palette:scale-gradient  
+      set pcolor palette:scale-gradient
         [  [ 255 0 0 ] [ 255 255 255 ] [0 0 255]] patch-value 0 10
    ]
 end
@@ -155,15 +155,15 @@ to netlogo-color-scale-gradient
   __clear-all-and-reset-ticks
 ask patches
   [
-      let normalized-value  (pxcor + (pycor * world-width)) / 
-                            (world-width * world-height) 
-      let patch-value normalized-value  * 10 + 5  
+      let normalized-value  (pxcor + (pycor * world-width)) /
+                            (world-width * world-height)
+      let patch-value normalized-value  * 10 + 5
       set plabel round patch-value
       ; netlogo red is different than [ 255 0 0 ] it is [215 50 41]
-      let red-netlogo extract-rgb red 
+      let red-netlogo extract-rgb red
       ; netLogo blue is different than [ 0 0 255 ] it is [52 93 169
-      let blue-netlogo extract-rgb blue 
-      set pcolor palette:scale-gradient 
+      let blue-netlogo extract-rgb blue
+      set pcolor palette:scale-gradient
         ( list red-netlogo [ 255 255 255 ] blue-netlogo ) patch-value 0 10
    ]
 end
@@ -177,8 +177,8 @@ to scheme-color-scale-gradient
   __clear-all-and-reset-ticks
 ask patches
   [
-      let normalized-value  (pxcor + (pycor * world-width)) / 
-                            (world-width * world-height) 
+      let normalized-value  (pxcor + (pycor * world-width)) /
+                            (world-width * world-height)
       let patch-value normalized-value  * 10  + 5
       set plabel round patch-value
       set pcolor palette:scale-gradient  palette:scheme-colors "Divergent" "Spectral" 9 patch-value 0 10
@@ -216,7 +216,7 @@ Chantge the colors of the gradients.
 
 ## RELATED MODELS
 
-This section could give the names of models in the NetLogo Models Library or elsewhere 
+This section could give the names of models in the NetLogo Models Library or elsewhere
 
 ## CREDITS AND REFERENCES
 

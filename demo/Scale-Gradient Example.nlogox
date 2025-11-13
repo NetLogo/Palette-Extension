@@ -87,8 +87,8 @@ In this particular example the gradient is taking the value of ( pxcor + (pycor 
 
 SCALE-GRADIENT [ [r g b] [r g b]] value range1 range2
 
-	where the first [r g b] list is the initial color
-	and the second [r g b] list is the final color.
+  where the first [r g b] list is the initial color
+  and the second [r g b] list is the final color.
 
 The syntax and behavior is similar to the SCALE-COLOR primitive otherwise:
 

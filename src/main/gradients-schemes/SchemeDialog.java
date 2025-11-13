@@ -8,18 +8,18 @@ import org.nlogo.core.SyntaxJ;
 import org.nlogo.window.GUIWorkspace;
 
 public class SchemeDialog implements Command {
-	public Syntax getSyntax() {
-		return SyntaxJ.commandSyntax(new int[] { });
-	}
+    public Syntax getSyntax() {
+        return SyntaxJ.commandSyntax(new int[] { });
+    }
 
-	public String getAgentClassString() {
-		return "OTPL" ;
-	}
+    public String getAgentClassString() {
+        return "OTPL" ;
+    }
 
-	public void perform(Argument args[], Context context)
-		throws ExtensionException, LogoException {
+    public void perform(Argument args[], Context context)
+        throws ExtensionException, LogoException {
       java.awt.Frame frame  = ((GUIWorkspace)context.workspace()).getFrame();
-  		ColorSchemesDialog csd = new ColorSchemesDialog(frame);
-		csd.showDialog();
-	}
+          ColorSchemesDialog csd = new ColorSchemesDialog(frame);
+        csd.showDialog();
+    }
 }

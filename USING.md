@@ -25,7 +25,7 @@ palette:scale-scheme
 
 #### Colors can be represented as NetLogo colors or RGB or RGBA colors
 
-*	A NetLogo color (NLC or NL color) is a number in the range 0 to 140, with the exception of 140 itself, other values are ‘wrapped.'
+* A NetLogo color (NLC or NL color) is a number in the range 0 to 140, with the exception of 140 itself, other values are ‘wrapped.'
     - NetLogo colors are shades of a base color which has units digit 5, and is in the middle of the shade range.
 * An RGB color is a list of 3 numbers.
     - The numbers represent red, green and blue and are in the range 0 to 255.
